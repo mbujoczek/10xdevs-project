@@ -16,8 +16,6 @@
 - **Dostęp do danych (ORM):** Entity Framework
 - **Wzorzec architektoniczny:** CQRS (Command Query Responsibility Segregation)
 - **Dokumentacja API:** Swagger (OpenAPI)
-- **Testy jednostkowe:** xUnit.net
-- **Mockowanie:** Moq
 
 ## Baza Danych
 
@@ -39,8 +37,3 @@
 
 - **Testy jednostkowe i komponentowe:** Vitest
 - **Testy End-to-End (E2E):** Cypress
-
-### Backend
-
-- **Testy jednostkowe:** xUnit.net (z użyciem dostawcy bazy danych w pamięci dla zapytań EF Core).
-- **Biblioteka do mockowania:** Moq.

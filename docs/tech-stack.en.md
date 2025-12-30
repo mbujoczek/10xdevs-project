@@ -16,8 +16,6 @@
 - **Data Access (ORM):** Entity Framework
 - **Architectural Pattern:** CQRS (Command Query Responsibility Segregation)
 - **API Documentation:** Swagger (OpenAPI)
-- **Unit Testing:** xUnit.net
-- **Mocking:** Moq
 
 ## Database
 
@@ -39,8 +37,3 @@
 
 - **Unit and Component Tests:** Vitest
 - **End-to-End (E2E) Tests:** Cypress
-
-### Backend
-
-- **Unit Tests:** xUnit.net (using the in-memory database provider for EF Core queries).
-- **Mocking Library:** Moq.
