@@ -2,6 +2,11 @@
 
 Backend application built with .NET 8 following Clean Architecture principles.
 
+## Recommended IDE Setup
+
+- [Visual Studio 2022](https://visualstudio.microsoft.com/vs/)
+- [VS Code](https://code.visualstudio.com/) + [C# Dev Kit](https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.csdevkit)
+
 ## Project Structure
 
 ```
@@ -31,13 +36,42 @@ The project follows Clean Architecture with the CQRS pattern:
 - SQL Server
 - Swagger/OpenAPI
 
-## Getting Started
+## Project Setup
 
-1. Update the connection string in `appsettings.json`
-2. Run migrations: `dotnet ef database update --project src/10xdevs.Infrastructure --startup-project src/10xdevs.Api`
-3. Run the application: `dotnet run --project src/10xdevs.Api`
+### Restore Dependencies
 
-## Development
+```sh
+dotnet restore 10xdevs.sln
+```
+
+### Configure Database
+
+1.  Update the connection string in `src/10xdevs.Api/appsettings.json`.
+2.  Run database migrations:
+
+```sh
+dotnet ef database update --project src/10xdevs.Infrastructure --startup-project src/10xdevs.Api
+```
+
+### Run for Development
+
+```sh
+dotnet run --project src/10xdevs.Api
+```
+
+### Build for Production
+
+```sh
+dotnet publish 10xdevs.sln -c Release -o ./publish
+```
+
+### Code Formatting
+
+```sh
+dotnet format 10xdevs.sln
+```
+
+## Development Guidelines
 
 - Commands go in `Application/Commands/`
 - Queries go in `Application/Queries/`
