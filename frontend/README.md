@@ -1,4 +1,4 @@
-# 10xdevs Frontend
+# AI Flashcard Generator - Frontend
 
 This template helps you get started developing with Vue 3 and Vite. It's configured to follow the best practices and conventions outlined in the project's AI guidelines.
 

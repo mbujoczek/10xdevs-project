@@ -1,4 +1,4 @@
-# 10xdevs Backend
+# AI Flashcard Generator - Backend
 
 Backend application built with .NET 8 following Clean Architecture principles.
 
