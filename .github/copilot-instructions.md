@@ -17,6 +17,99 @@
 - Use v-memo for performance optimization in render-heavy list rendering scenarios
 - Implement shallow refs for large objects that don't need deep reactivity
 
+#### VUE_TECHNOLOGY_VERSIONS
+
+- **Vue.js**: Use version ^3.4.0 or newer to leverage the latest features and performance improvements.
+- **Vite**: Use version ^5.0.0 or newer as the project build tool.
+- **Pinia**: Version ^2.1.0 or newer.
+- **Vue Router**: Version ^4.3.0 or newer.
+- **TypeScript**: Version ^5.4.0 or newer, configured in `strict` mode.
+
+#### VUE_PATTERNS_AND_CONVENTIONS
+
+- **State Management**: Use Pinia. Split stores into modules per functionality. Avoid storing data in stores that can be component local state.
+- **API Communication**: Abstract API layer (in the `api/` directory) using `fetch` or `axios`. Each API module should be responsible for a single resource (e.g., `users.api.ts`).
+- **Component Structure**:
+  - Use `<script setup>` and Composition API.
+  - Props should be thoroughly defined with `type`, `required`, and validator when necessary.
+  - Emits should be defined using `defineEmits`.
+- **Reusable Logic**: Extract shared logic between components into `composables` files.
+- **Testing**: Write unit tests for composables, stores, and complex components using `Vitest`.
+
+#### VUE_NAMING_CONVENTIONS
+
+- **Components**:
+  - File names: `PascalCase.vue` (e.g., `UserProfile.vue`).
+  - Template names: `<PascalCase>` (e.g., `<UserProfile>`).
+  - View-only components (without logic): `The<Name>.vue` (e.g., `TheHeader.vue`).
+  - Base components (reusable): `Base<Name>.vue` (e.g., `BaseButton.vue`).
+- **Composables**: `camelCase` with `use` prefix (e.g., `useAuth.ts`).
+- **Store (Pinia)**: `camelCase` with `store` suffix (e.g., `auth.store.ts`, and inside `defineStore('authStore', ...)`).
+- **Views (route components)**: `PascalCase` with `View.vue` suffix (e.g., `HomeView.vue`).
+- **Routes (Vue Router)**: `camelCase` (e.g., `userProfile`).
+
+#### VUE_DIRECTORY_STRUCTURE
+
+The directory structure should be feature-based to ensure scalability and maintainability.
+
+```
+src/
+├── api/                # API communication modules (e.g., auth.api.ts)
+├── assets/             # Static assets (images, fonts)
+├── components/
+│   ├── base/           # Base components (e.g., BaseButton.vue)
+│   └── common/         # Shared, complex components
+├── composables/        # Reusable logic (e.g., useAuth.ts)
+├── features/           # Main application modules
+│   └── authentication/
+│       ├── components/ # Module-specific components
+│       ├── views/      # Module views (pages)
+│       ├── store.ts    # Pinia store for the module
+│       └── routes.ts   # Module route definitions
+├── layouts/            # Page layouts (e.g., DefaultLayout.vue)
+├── router/             # Vue Router configuration (index.ts)
+├── services/           # Business logic (e.g., validation.service.ts)
+├── store/              # Main Pinia configuration (index.ts)
+├── styles/             # Global styles, SCSS variables
+├── types/              # Global TypeScript type definitions
+├── utils/              # Helper functions
+├── App.vue             # Main application component
+└── main.ts             # Application entry point
+```
+
+- **`api/`**: Data abstraction layer. Responsible **exclusively** for communication with external APIs. Defines functions for sending HTTP requests and transforming raw data (DTOs - Data Transfer Objects). Contains no business logic. Separates data fetching from data usage.
+
+- **`assets/`**: Stores static files such as images (SVG, PNG), fonts, or global CSS files that are imported directly into the project.
+
+- **`components/base/`**: Fundamental, atomic UI components such as `BaseButton.vue`, `BaseInput.vue`, `BaseCard.vue`. Highly reusable, contain no business logic, and are visually consistent throughout the application.
+
+- **`components/common/`**: Complex components shared between different features but not generic enough for `base`. Example: `UserAvatarWithStatus.vue`, which may consist of several base components.
+
+- **`composables/`**: Reusable, stateful logic extracted using the Composition API. Each file (e.g., `useAuth.ts`) exports a composable function that can be used in multiple components to share logic (e.g., authentication state management, mouse event handling).
+
+- **`features/`**: Heart of the architecture. Each subdirectory is a separate business module of the application (e.g., `authentication`, `orders`). Groups all related files in one place, making project management and scaling easier.
+
+  - **`components/`**: Components used **only** within the given feature. Example: `LoginForm.vue` in the `authentication` module won't be used elsewhere.
+  - **`views/`**: Page components that are directly mapped to routes in the router. Example: `LoginView.vue` is rendered when the user navigates to the `/login` route.
+
+- **`layouts/`**: Defines main page layouts (e.g., `DefaultLayout.vue` with navigation and footer, `AuthLayout.vue` for login pages). These components use `<slot>` to dynamically render view content provided by the router.
+
+- **`router/`**: Contains Vue Router configuration. The `index.ts` file aggregates routes defined in individual `features` modules and configures global navigation guards.
+
+- **`services/`**: Business logic layer. Services use functions from the `api/` directory to fetch data, then implement domain-specific logic (e.g., calculations, validations, data aggregation from multiple sources). They bridge raw data and its presentation in the user interface.
+
+- **`store/`**: Main Pinia configuration. The `index.ts` file creates the Pinia instance. Individual store modules (e.g., `auth.store.ts`) are located in their respective `features` directories.
+
+- **`styles/`**: Global styles, SCSS/SASS variables, mixins, and functions that should be available throughout the application.
+
+- **`types/`**: Global TypeScript type and interface definitions shared across different parts of the application (e.g., `User`, `Product` types).
+
+- **`utils/`**: Collection of small, stateless helper functions that perform simple, repetitive tasks (e.g., date formatting, string operations).
+
+- **`App.vue`**: Main, root application component. Typically contains the `RouterView` component that renders the appropriate view based on the current route, and possibly global components like a notification system.
+
+- **`main.ts`**: Application entry point. Here the Vue application instance is created, the main `App.vue` component is mounted, and plugins such as Vue Router and Pinia are registered.
+
 #### PINIA
 
 - Create multiple stores based on logical domains instead of a single large store
@@ -107,15 +200,6 @@
 
 ### Guidelines for DOTNET
 
-#### ENTITY_FRAMEWORK
-
-- Use the repository and unit of work patterns to abstract data access logic and simplify testing
-- Implement eager loading with Include() to avoid N+1 query problems for {{entity_relationships}}
-- Use migrations for database schema changes and version control with proper naming conventions
-- Apply appropriate tracking behavior (AsNoTracking() for read-only queries) to optimize performance
-- Implement query optimization techniques like compiled queries for frequently executed database operations
-- Use value conversions for complex property transformations and proper handling of {{custom_data_types}}
-
 #### ASP_NET
 
 - Use minimal APIs for simple endpoints in .NET 6+ applications to reduce boilerplate code
@@ -124,6 +208,136 @@
 - Apply proper response caching with cache profiles and ETags for improved performance on {{high_traffic_endpoints}}
 - Implement proper exception handling with ExceptionFilter or middleware to provide consistent error responses
 - Use dependency injection with scoped lifetime for request-specific services and singleton for stateless services
+
+#### DOTNET_TECHNOLOGY_VERSIONS
+
+- **.NET**: Use version ^8.0 or newer for the latest features and long-term support.
+- **Entity Framework Core**: Version ^8.0 or newer.
+- **MediatR**: Version ^12.0 or newer for implementing the CQRS pattern.
+- **Swashbuckle (Swagger)**: Version ^6.5 or newer for API documentation.
+
+#### DOTNET_CODING_STANDARDS
+
+- Use nullable reference types enabled globally to prevent null reference exceptions
+- Implement async/await for all I/O-bound operations to improve scalability
+- Use record types for DTOs and value objects for immutability
+- Leverage pattern matching and switch expressions for cleaner conditional logic
+- Use init-only properties for immutable object initialization
+- Implement proper cancellation token support in all async methods
+- Use global using directives to reduce repetitive imports
+- Leverage minimal APIs for simple CRUD endpoints
+- Use source generators where applicable for performance optimization
+- Implement primary constructors for cleaner dependency injection
+
+#### DOTNET_PATTERNS_AND_CONVENTIONS
+
+- **Architecture**: Implement CQRS (Command Query Responsibility Segregation) using MediatR to separate read and write operations.
+- **API Structure**: Use controllers for complex endpoints with multiple actions. Use minimal APIs for simple CRUD operations.
+- **Data Access**: Abstract data access using the Repository and Unit of Work patterns. Keep repositories focused on single entities.
+- **Error Handling**: Implement global exception handling middleware. Return consistent error responses using ProblemDetails.
+- **Dependency Injection**: Register services with appropriate lifetimes (Transient, Scoped, Singleton). Use constructor injection exclusively.
+- **Configuration**: Use the Options pattern for strongly-typed configuration. Validate configuration at startup.
+- **Logging**: Use structured logging with ILogger. Include correlation IDs for request tracking.
+
+#### DOTNET_NAMING_CONVENTIONS
+
+- **Projects**: `PascalCase` (e.g., `10xdevs.Api`, `10xdevs.Application`, `10xdevs.Infrastructure`).
+- **Controllers**: `PascalCase` with `Controller` suffix (e.g., `UsersController`).
+- **Commands**: `PascalCase` with descriptive action and `Command` suffix (e.g., `CreateUserCommand`, `UpdateUserCommand`).
+- **Queries**: `PascalCase` with descriptive question and `Query` suffix (e.g., `GetUserByIdQuery`, `GetAllUsersQuery`).
+- **Handlers**: `PascalCase` with `Handler` suffix matching the command/query (e.g., `CreateUserCommandHandler`).
+- **Entities**: `PascalCase` singular form (e.g., `User`, `Order`).
+- **DTOs**: `PascalCase` with `Dto` suffix (e.g., `UserDto`, `CreateUserDto`).
+- **Repositories**: `I` prefix for interfaces, implementation without prefix (e.g., `IUserRepository`, `UserRepository`).
+- **Services**: `I` prefix for interfaces with `Service` suffix (e.g., `IEmailService`, `EmailService`).
+- **Endpoints**: Use plural resource names in lowercase (e.g., `/api/users`, `/api/orders`).
+
+#### DOTNET_DIRECTORY_STRUCTURE
+
+The directory structure follows Clean Architecture principles with clear separation of concerns.
+
+```
+solution-root/
+└── src/
+    ├── 10xdevs.Api/                   # Presentation layer (Web API)
+    │   ├── Controllers/                # API controllers
+    │   ├── Middleware/                 # Custom middleware
+    │   ├── Filters/                    # Action filters
+    │   ├── Extensions/                 # Service collection extensions
+    │   ├── appsettings.json            # Configuration files
+    │   └── Program.cs                  # Application entry point
+    │
+    ├── 10xdevs.Application/           # Application layer (CQRS)
+    │   ├── Commands/                   # Command handlers
+    │   │   └── Users/
+    │   │       ├── CreateUser/
+    │   │       │   ├── CreateUserCommand.cs
+    │   │       │   └── CreateUserCommandHandler.cs
+    │   │       └── UpdateUser/
+    │   ├── Queries/                    # Query handlers
+    │   │   └── Users/
+    │   │       ├── GetUserById/
+    │   │       │   ├── GetUserByIdQuery.cs
+    │   │       │   └── GetUserByIdQueryHandler.cs
+    │   │       └── GetAllUsers/
+    │   ├── DTOs/                       # Data Transfer Objects
+    │   ├── Interfaces/                 # Application interfaces
+    │   ├── Behaviors/                  # MediatR pipeline behaviors
+    │   ├── Mappings/                   # AutoMapper profiles
+    │   └── Exceptions/                 # Custom exceptions
+    │
+    ├── 10xdevs.Domain/                # Domain layer
+    │   ├── Entities/                   # Domain entities
+    │   ├── ValueObjects/               # Value objects
+    │   ├── Enums/                      # Enumerations
+    │   ├── Interfaces/                 # Domain interfaces
+    │   └── Exceptions/                 # Domain exceptions
+    │
+    └── 10xdevs.Infrastructure/        # Infrastructure layer
+        ├── Data/                       # Database context and configurations
+        │   ├── ApplicationDbContext.cs
+        │   ├── Configurations/         # Entity configurations
+        │   └── Migrations/             # EF Core migrations
+        ├── Repositories/               # Repository implementations
+        ├── Services/                   # External service implementations
+        └── Extensions/                 # Infrastructure extensions
+```
+
+- **`10xdevs.Api/`**: Presentation layer containing API controllers, middleware, filters, and application configuration. Handles HTTP requests/responses and delegates business logic to the Application layer.
+
+- **`10xdevs.Application/`**: Application logic layer implementing CQRS pattern with MediatR. Contains commands (write operations) and queries (read operations) with their handlers. Defines DTOs for data transfer and application-level interfaces.
+
+  - **`Commands/`**: Write operations organized by feature. Each command has its handler in a dedicated folder.
+  - **`Queries/`**: Read operations organized by feature. Each query has its handler in a dedicated folder.
+  - **`Behaviors/`**: MediatR pipeline behaviors for cross-cutting concerns (logging, transactions).
+
+- **`10xdevs.Domain/`**: Core domain layer containing business entities, value objects, domain logic, and domain events. Independent of external concerns and frameworks.
+
+- **`10xdevs.Infrastructure/`**: Infrastructure layer implementing interfaces defined in Application and Domain layers. Contains database context, repository implementations, external service integrations, and EF Core configurations.
+
+  - **`Data/Configurations/`**: Fluent API configurations for entity mappings.
+  - **`Repositories/`**: Concrete implementations of repository interfaces.
+
+#### ENTITY_FRAMEWORK
+
+- Use the repository and unit of work patterns to abstract data access logic
+- Implement eager loading with Include() to avoid N+1 query problems for {{entity_relationships}}
+- Use migrations for database schema changes and version control with proper naming conventions
+- Apply appropriate tracking behavior (AsNoTracking() for read-only queries) to optimize performance
+- Implement query optimization techniques like compiled queries for frequently executed database operations
+- Use value conversions for complex property transformations and proper handling of {{custom_data_types}}
+
+#### CQRS_MEDIATR
+
+- Organize commands and queries in separate folders by feature/entity for better maintainability
+- Keep command and query handlers focused on a single responsibility
+- Use the request/response pattern - each command/query should have a clear return type
+- Use pipeline behaviors for cross-cutting concerns like logging and transaction management
+- Commands should return operation results or unit, not domain entities directly
+- Queries should return DTOs, never domain entities, to prevent accidental modifications
+- Place each command/query with its handler in the same folder
+- Use cancellation tokens in all handlers to support request cancellation
+- Keep handlers thin by delegating to domain services or repositories
 
 ## DATABASE
 
