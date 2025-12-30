@@ -58,7 +58,6 @@ Tabela do logowania metryk generowania fiszek przez AI.
 | --------------- | ---------- | ------------------------------------------ | ------------------------------------------ |
 | Id              | INT        | PRIMARY KEY IDENTITY(1,1)                  | Unikalny identyfikator zdarzenia           |
 | UserId          | INT        | NOT NULL, FOREIGN KEY REFERENCES Users(Id) | Identyfikator użytkownika                  |
-| GeneratedAtUtc  | DATETIME2  | NOT NULL, DEFAULT GETUTCDATE()             | Data i czas wygenerowania fiszek (UTC)     |
 | CandidatesCount | INT        | NOT NULL                                   | Liczba wygenerowanych kandydatów na fiszki |
 | AcceptedCount   | INT        | NOT NULL, DEFAULT 0                        | Liczba zaakceptowanych fiszek bez edycji   |
 | EditedCount     | INT        | NOT NULL, DEFAULT 0                        | Liczba fiszek zaakceptowanych po edycji    |
@@ -143,7 +142,7 @@ Struktura zostanie utworzona automatycznie przez Serilog.Sinks.MSSqlServer zgodn
 
 - `CK_Flashcards_Source` - Kolumna `Source` może przyjąć tylko wartości liczbowe: 0 (AI), 1 (Manual)
 - `CK_Flashcards_Status` - Kolumna `Status` może przyjąć tylko wartości liczbowe: 0 (Not applicable), 1 (Accepted), 2 (Edited), 3 (Deleted)
-- `CK_Flashcards_SRSLastGrade` - Kolumna `SRSLastGrade` może przyjąć tylko wartości od 0 do 5 (włącznie)
+- `CK_Flashcards_SRSLastGrade` - Kolumna `SRSLastGrade` może przyjąć tylko wartości NULL lub od 0 do 5 (włącznie)
 
 ### 4.2. Default Values
 

@@ -58,7 +58,6 @@ Table for logging AI flashcard generation metrics.
 | --------------- | --------- | ------------------------------------------ | --------------------------------------------- |
 | Id              | INT       | PRIMARY KEY IDENTITY(1,1)                  | Unique event identifier                       |
 | UserId          | INT       | NOT NULL, FOREIGN KEY REFERENCES Users(Id) | User identifier                               |
-| GeneratedAtUtc  | DATETIME2 | NOT NULL, DEFAULT GETUTCDATE()             | Flashcard generation date and time (UTC)      |
 | CandidatesCount | INT       | NOT NULL                                   | Number of generated flashcard candidates      |
 | AcceptedCount   | INT       | NOT NULL, DEFAULT 0                        | Number of flashcards accepted without editing |
 | EditedCount     | INT       | NOT NULL, DEFAULT 0                        | Number of flashcards accepted after editing   |
@@ -143,7 +142,7 @@ The structure will be automatically created by Serilog.Sinks.MSSqlServer accordi
 
 - `CK_Flashcards_Source` - `Source` column can only accept numeric values: 0 (AI), 1 (Manual)
 - `CK_Flashcards_Status` - `Status` column can only accept numeric values: 0 (Not applicable), 1 (Accepted), 2 (Edited), 3 (Deleted)
-- `CK_Flashcards_SRSLastGrade` - `SRSLastGrade` column can only accept values from 0 to 5 (inclusive)
+- `CK_Flashcards_SRSLastGrade` - `SRSLastGrade` column can only accept NULL or values from 0 to 5 (inclusive)
 
 ### 4.2. Default Values
 
