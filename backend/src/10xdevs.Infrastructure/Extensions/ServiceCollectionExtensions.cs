@@ -1,3 +1,4 @@
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using _10xdevs.Application.Interfaces;
 using _10xdevs.Domain.Interfaces;
@@ -12,11 +13,24 @@ public static class ServiceCollectionExtensions
     {
         // Register repositories
         services.AddScoped<IUserRepository, UserRepository>();
+        services.AddScoped<IFlashcardGenerationEventRepository, FlashcardGenerationEventRepository>();
         services.AddScoped<IUnitOfWork, UnitOfWork>();
 
         // Register services
         services.AddSingleton<IPasswordHashingService, PasswordHashingService>();
         services.AddSingleton<IJwtTokenService, JwtTokenService>();
+
+        // Register AI service with HttpClient
+        services.AddHttpClient<IFlashcardAIService, FlashcardAIService>((serviceProvider, client) =>
+        {
+            var configuration = serviceProvider.GetRequiredService<IConfiguration>();
+            var baseUrl = configuration["Ollama:BaseUrl"] ?? "http://localhost:11434";
+            var timeout = int.Parse(configuration["Ollama:Timeout"] ?? "240");
+
+            client.BaseAddress = new Uri(baseUrl);
+            client.Timeout = TimeSpan.FromSeconds(timeout);
+        })
+        .SetHandlerLifetime(TimeSpan.FromMinutes(5)); // Connection pooling optimization
 
         return services;
     }

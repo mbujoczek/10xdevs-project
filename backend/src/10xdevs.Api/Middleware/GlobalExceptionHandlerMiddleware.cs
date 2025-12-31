@@ -67,6 +67,13 @@ public class GlobalExceptionHandlerMiddleware
                 invalidCredentialsException.Message,
                 traceId),
 
+            AIServiceUnavailableException aiServiceException => CreateProblemDetails(
+                context,
+                HttpStatusCode.ServiceUnavailable,
+                "AI Service Unavailable",
+                "The AI flashcard generation service is currently unavailable. Please try again later.",
+                traceId),
+
             _ => CreateProblemDetails(
                 context,
                 HttpStatusCode.InternalServerError,
@@ -122,6 +129,7 @@ public class GlobalExceptionHandlerMiddleware
             HttpStatusCode.BadRequest => "https://tools.ietf.org/html/rfc7231#section-6.5.1",
             HttpStatusCode.Unauthorized => "https://tools.ietf.org/html/rfc7235#section-3.1",
             HttpStatusCode.Conflict => "https://tools.ietf.org/html/rfc7231#section-6.5.8",
+            HttpStatusCode.ServiceUnavailable => "https://tools.ietf.org/html/rfc7231#section-6.6.4",
             HttpStatusCode.InternalServerError => "https://tools.ietf.org/html/rfc7231#section-6.6.1",
             _ => "https://tools.ietf.org/html/rfc7231"
         };

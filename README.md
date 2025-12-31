@@ -58,22 +58,38 @@ To set up and run this project on your local machine, you will need to configure
 
 - **Node.js**: Version `~20.19.0` (as specified in `.nvmrc`). We recommend using [nvm](https://github.com/nvm-sh/nvm) to manage Node.js versions.
 - **.NET SDK**: Version 8.0 or newer.
-- **SQL Server**: A running instance of SQL Server.
+- **SQL Server**: A running instance of SQL Server (LocalDB, Express, or full version).
+- **Ollama**: Local LLM server with Phi3 model for AI flashcard generation.
 
 ### Setup and Installation
 
-1.  **Clone the repository:**
+1. **Clone the repository:**
 
-    ```sh
-    git clone https://github.com/mbujoczek/10xdevs-project.git
-    cd 10xdevs-project
-    ```
+   ```sh
+   git clone https://github.com/mbujoczek/10xdevs-project.git
+   cd 10xdevs-project
+   ```
 
-2.  **Set up the Backend:**
-    For detailed instructions on restoring dependencies, configuring the database, and running the API, please see the [Backend README](./backend/README.md).
+2. **Install and Configure Ollama:**
 
-3.  **Set up the Frontend:**
-    For detailed instructions on installing dependencies and running the development server, please see the [Frontend README](./frontend/README.md).
+   ```sh
+   # Install Ollama from https://ollama.ai/
+   # Pull the Phi3 model:
+   ollama pull phi3
+
+   # Verify Ollama is running:
+   ollama list
+   ```
+
+3. **Set up the Backend:**
+   For detailed instructions on restoring dependencies, configuring the database, and running the API, see:
+
+   - [Backend README](./backend/README.md) - Full documentation
+   - [Backend Quick Start](./backend/QUICKSTART.md) - Get running in 5 minutes
+   - [Backend Deployment](./backend/DEPLOYMENT.md) - Production deployment guide
+
+4. **Set up the Frontend:**
+   For detailed instructions on installing dependencies and running the development server, please see the [Frontend README](./frontend/README.md).
 
 ## Project Scope
 
@@ -82,7 +98,7 @@ The initial version (MVP) of the project focuses on delivering the core function
 ### Key Features (In Scope for MVP)
 
 - **User Authentication**: Secure account creation and login using JWT.
-- **AI-Powered Generation**: Create flashcard suggestions from text in English and Polish.
+- **AI-Powered Generation**: Create flashcard suggestions from text in English and Polish using Ollama/Phi3.
 - **Review Workflow**: A dedicated interface to accept, edit, or reject AI-generated cards.
 - **Flashcard Management**: Manually create, read, update, and delete flashcards.
 - **Spaced Repetition System (SRS)**: An integrated learning session based on the SM-2 algorithm.
