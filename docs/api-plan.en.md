@@ -117,25 +117,6 @@ The API exposes the following main resources mapped to database tables:
 
 ---
 
-#### 2.1.3. Logout User
-
-- **Method:** `POST`
-- **Path:** `/api/auth/logout`
-- **Description:** Invalidates the current JWT token (client-side token removal)
-- **Authentication:** Required (Bearer token)
-
-**Request Body:** None
-
-**Success Response (204 No Content):**
-
-- Empty body
-
-**Error Responses:**
-
-- `401 Unauthorized` - Missing or invalid token
-
----
-
 ### 2.2. Flashcard Generation Endpoints
 
 #### 2.2.1. Generate Flashcards from Text

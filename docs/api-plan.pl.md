@@ -117,25 +117,6 @@ API udostępnia następujące główne zasoby mapowane na tabele bazy danych:
 
 ---
 
-#### 2.1.3. Wylogowanie użytkownika
-
-- **Metoda:** `POST`
-- **Ścieżka:** `/api/auth/logout`
-- **Opis:** Unieważnia bieżący token JWT (usunięcie tokenu po stronie klienta)
-- **Uwierzytelnianie:** Wymagane (token Bearer)
-
-**Treść żądania:** Brak
-
-**Odpowiedź sukcesu (204 No Content):**
-
-- Pusta treść
-
-**Odpowiedzi błędów:**
-
-- `401 Unauthorized` - Brakujący lub nieprawidłowy token
-
----
-
 ### 2.2. Punkty końcowe generowania fiszek
 
 #### 2.2.1. Generowanie fiszek z tekstu
