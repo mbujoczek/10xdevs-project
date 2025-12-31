@@ -60,6 +60,13 @@ public class GlobalExceptionHandlerMiddleware
                 duplicateUsernameException.Message,
                 traceId),
 
+            InvalidCredentialsException invalidCredentialsException => CreateProblemDetails(
+                context,
+                HttpStatusCode.Unauthorized,
+                "Invalid Credentials",
+                invalidCredentialsException.Message,
+                traceId),
+
             _ => CreateProblemDetails(
                 context,
                 HttpStatusCode.InternalServerError,
@@ -113,6 +120,7 @@ public class GlobalExceptionHandlerMiddleware
         var type = statusCode switch
         {
             HttpStatusCode.BadRequest => "https://tools.ietf.org/html/rfc7231#section-6.5.1",
+            HttpStatusCode.Unauthorized => "https://tools.ietf.org/html/rfc7235#section-3.1",
             HttpStatusCode.Conflict => "https://tools.ietf.org/html/rfc7231#section-6.5.8",
             HttpStatusCode.InternalServerError => "https://tools.ietf.org/html/rfc7231#section-6.6.1",
             _ => "https://tools.ietf.org/html/rfc7231"

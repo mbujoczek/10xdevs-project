@@ -24,7 +24,7 @@ public class JwtTokenService : IJwtTokenService
             ?? throw new InvalidOperationException("JWT SecretKey is not configured.");
         var issuer = _configuration["Jwt:Issuer"];
         var audience = _configuration["Jwt:Audience"];
-        var expirationHours = int.Parse(_configuration["Jwt:ExpirationHours"] ?? "24");
+        var expirationHours = GetExpirationHours();
 
         var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretKey));
         var credentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
@@ -46,6 +46,24 @@ public class JwtTokenService : IJwtTokenService
         );
 
         return _tokenHandler.WriteToken(token);
+    }
+
+    public DateTime? GetTokenExpiration(string token)
+    {
+        try
+        {
+            var jwtToken = _tokenHandler.ReadJwtToken(token);
+            return jwtToken.ValidTo;
+        }
+        catch
+        {
+            return null;
+        }
+    }
+
+    private int GetExpirationHours()
+    {
+        return int.Parse(_configuration["Jwt:ExpirationHours"] ?? "24");
     }
 
     public ClaimsPrincipal? ValidateToken(string token)

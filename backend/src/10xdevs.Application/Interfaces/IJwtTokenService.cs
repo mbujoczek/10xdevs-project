@@ -18,4 +18,11 @@ public interface IJwtTokenService
     /// <param name="token">The JWT token to validate.</param>
     /// <returns>The ClaimsPrincipal if valid; otherwise, null.</returns>
     ClaimsPrincipal? ValidateToken(string token);
+
+    /// <summary>
+    /// Extracts the expiration date from a JWT token.
+    /// </summary>
+    /// <param name="token">The JWT token string.</param>
+    /// <returns>The UTC DateTime when the token expires, or null if token is invalid.</returns>
+    DateTime? GetTokenExpiration(string token);
 }
