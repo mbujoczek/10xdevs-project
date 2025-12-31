@@ -8,8 +8,11 @@ public class FlashcardGenerationEventConfiguration : IEntityTypeConfiguration<Fl
 {
     public void Configure(EntityTypeBuilder<FlashcardGenerationEvent> builder)
     {
-        // Table name
-        builder.ToTable("FlashcardGenerationEvents");
+        // Table name with trigger declaration
+        builder.ToTable("FlashcardGenerationEvents", tb =>
+        {
+            tb.HasTrigger("TR_FlashcardGenerationEvents_UpdatedAtUtc");
+        });
 
         // Primary key
         builder.HasKey(e => e.Id);

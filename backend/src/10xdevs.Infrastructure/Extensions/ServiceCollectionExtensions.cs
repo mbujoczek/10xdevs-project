@@ -14,6 +14,7 @@ public static class ServiceCollectionExtensions
         // Register repositories
         services.AddScoped<IUserRepository, UserRepository>();
         services.AddScoped<IFlashcardGenerationEventRepository, FlashcardGenerationEventRepository>();
+        services.AddScoped<IFlashcardRepository, FlashcardRepository>();
         services.AddScoped<IUnitOfWork, UnitOfWork>();
 
         // Register services

@@ -53,6 +53,34 @@ public class GlobalExceptionHandlerMiddleware
             ValidationException validationException => CreateValidationProblemDetails(
                 context, validationException, traceId),
 
+            NotFoundException notFoundException => CreateProblemDetails(
+                context,
+                HttpStatusCode.NotFound,
+                "Not Found",
+                notFoundException.Message,
+                traceId),
+
+            ForbiddenException forbiddenException => CreateProblemDetails(
+                context,
+                HttpStatusCode.Forbidden,
+                "Forbidden",
+                forbiddenException.Message,
+                traceId),
+
+            ConflictException conflictException => CreateProblemDetails(
+                context,
+                HttpStatusCode.Conflict,
+                "Conflict",
+                conflictException.Message,
+                traceId),
+
+            BadRequestException badRequestException => CreateProblemDetails(
+                context,
+                HttpStatusCode.BadRequest,
+                "Bad Request",
+                badRequestException.Message,
+                traceId),
+
             DuplicateUsernameException duplicateUsernameException => CreateProblemDetails(
                 context,
                 HttpStatusCode.Conflict,
@@ -128,6 +156,8 @@ public class GlobalExceptionHandlerMiddleware
         {
             HttpStatusCode.BadRequest => "https://tools.ietf.org/html/rfc7231#section-6.5.1",
             HttpStatusCode.Unauthorized => "https://tools.ietf.org/html/rfc7235#section-3.1",
+            HttpStatusCode.Forbidden => "https://tools.ietf.org/html/rfc7231#section-6.5.3",
+            HttpStatusCode.NotFound => "https://tools.ietf.org/html/rfc7231#section-6.5.4",
             HttpStatusCode.Conflict => "https://tools.ietf.org/html/rfc7231#section-6.5.8",
             HttpStatusCode.ServiceUnavailable => "https://tools.ietf.org/html/rfc7231#section-6.6.4",
             HttpStatusCode.InternalServerError => "https://tools.ietf.org/html/rfc7231#section-6.6.1",

@@ -9,12 +9,13 @@ public class FlashcardConfiguration : IEntityTypeConfiguration<Flashcard>
 {
     public void Configure(EntityTypeBuilder<Flashcard> builder)
     {
-        // Table name with check constraints
+        // Table name with check constraints and trigger declaration
         builder.ToTable("Flashcards", t =>
         {
             t.HasCheckConstraint("CK_Flashcards_Source", "[Source] IN (0, 1)");
             t.HasCheckConstraint("CK_Flashcards_Status", "[Status] IN (0, 1, 2, 3)");
             t.HasCheckConstraint("CK_Flashcards_SRSLastGrade", "[SRSLastGrade] IS NULL OR ([SRSLastGrade] >= 0 AND [SRSLastGrade] <= 5)");
+            t.HasTrigger("TR_Flashcards_UpdatedAtUtc");
         });
 
         // Primary key

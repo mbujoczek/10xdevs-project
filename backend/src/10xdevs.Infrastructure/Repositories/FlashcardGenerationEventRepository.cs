@@ -49,7 +49,7 @@ public class FlashcardGenerationEventRepository : IFlashcardGenerationEventRepos
     }
 
     /// <inheritdoc />
-    public async Task UpdateAsync(
+    public Task UpdateAsync(
         FlashcardGenerationEvent generationEvent,
         CancellationToken cancellationToken = default)
     {
@@ -62,7 +62,6 @@ public class FlashcardGenerationEventRepository : IFlashcardGenerationEventRepos
         // Update entity in context
         _context.FlashcardGenerationEvents.Update(generationEvent);
 
-        // Save changes to database
-        await _context.SaveChangesAsync(cancellationToken);
+        return Task.CompletedTask;
     }
 }
