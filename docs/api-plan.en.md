@@ -222,8 +222,7 @@ The API exposes the following main resources mapped to database tables:
       "question": "Which planet is the largest in our solar system?",
       "answer": "Jupiter is the largest planet in our solar system."
     }
-  ],
-  "rejected": ["temp-3", "temp-4"]
+  ]
 }
 ```
 

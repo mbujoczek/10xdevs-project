@@ -222,8 +222,7 @@ API udostępnia następujące główne zasoby mapowane na tabele bazy danych:
       "question": "Która planeta jest największa w naszym układzie słonecznym?",
       "answer": "Jowisz jest największą planetą w naszym układzie słonecznym."
     }
-  ],
-  "rejected": ["temp-3", "temp-4"]
+  ]
 }
 ```
 
