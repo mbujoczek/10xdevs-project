@@ -2,17 +2,12 @@ using FluentValidation;
 
 namespace _10xdevs.Application.Commands.Flashcards.UpdateFlashcard;
 
-public class UpdateFlashcardCommandValidator : AbstractValidator<UpdateFlashcardCommand>
+public class UpdateFlashcardCommandValidator : FlashcardCommandValidatorBase<UpdateFlashcardCommand>
 {
     public UpdateFlashcardCommandValidator()
     {
-        RuleFor(x => x.FlashcardId)
-            .GreaterThan(0)
-            .WithMessage("FlashcardId must be greater than 0");
-
-        RuleFor(x => x.UserId)
-            .GreaterThan(0)
-            .WithMessage("UserId must be greater than 0");
+        ValidateFlashcardId(x => x.FlashcardId);
+        ValidateUserId(x => x.UserId);
 
         RuleFor(x => x.Question)
             .NotEmpty()

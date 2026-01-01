@@ -1,6 +1,7 @@
 using _10xdevs.Api.Extensions;
 using _10xdevs.Application.Commands.Flashcards.CompleteReview;
 using _10xdevs.Application.Commands.Flashcards.CreateManualFlashcard;
+using _10xdevs.Application.Commands.Flashcards.DeleteFlashcard;
 using _10xdevs.Application.Commands.Flashcards.GenerateFlashcards;
 using _10xdevs.Application.Commands.Flashcards.UpdateFlashcard;
 using _10xdevs.Application.DTOs.Flashcards;
@@ -39,7 +40,7 @@ public class FlashcardsController : ControllerBase
     /// <response code="401">Unauthorized - invalid or missing token</response>
     [HttpGet]
     [ProducesResponseType(typeof(ListFlashcardsResponseDto), StatusCodes.Status200OK)]
-    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status401Unauthorized)]
     public async Task<ActionResult<ListFlashcardsResponseDto>> GetFlashcards(
         [FromQuery] List<int>? status,
@@ -170,6 +171,39 @@ public class FlashcardsController : ControllerBase
         var flashcard = await _mediator.Send(command, cancellationToken);
 
         return Ok(flashcard);
+    }
+
+    /// <summary>
+    /// Deletes a flashcard by its ID (soft delete).
+    /// </summary>
+    /// <param name="id">The ID of the flashcard to delete.</param>
+    /// <param name="cancellationToken">Cancellation token.</param>
+    /// <returns>No content on successful deletion.</returns>
+    /// <response code="204">Flashcard successfully deleted</response>
+    /// <response code="400">Invalid flashcard ID</response>
+    /// <response code="401">Unauthorized - invalid or missing token</response>
+    /// <response code="404">Not found - flashcard doesn't exist, is already deleted, or belongs to another user</response>
+    [HttpDelete("{id}")]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status401Unauthorized)]
+    [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status404NotFound)]
+    public async Task<IActionResult> DeleteFlashcard(int id, CancellationToken cancellationToken)
+    {
+        var userId = User.GetUserId();
+
+        _logger.LogInformation(
+            "Deleting flashcard. UserId: {UserId}, FlashcardId: {FlashcardId}",
+            userId, id);
+
+        var command = new DeleteFlashcardCommand(id, userId);
+        await _mediator.Send(command, cancellationToken);
+
+        _logger.LogInformation(
+            "Successfully deleted flashcard. UserId: {UserId}, FlashcardId: {FlashcardId}",
+            userId, id);
+
+        return NoContent();
     }
 
     /// <summary>
