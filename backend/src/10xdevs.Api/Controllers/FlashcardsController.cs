@@ -1,5 +1,6 @@
 using _10xdevs.Api.Extensions;
 using _10xdevs.Application.Commands.Flashcards.CompleteReview;
+using _10xdevs.Application.Commands.Flashcards.CreateManualFlashcard;
 using _10xdevs.Application.Commands.Flashcards.GenerateFlashcards;
 using _10xdevs.Application.DTOs.Flashcards;
 using _10xdevs.Application.Queries.Flashcards.GetFlashcardById;
@@ -102,6 +103,38 @@ public class FlashcardsController : ControllerBase
         var flashcard = await _mediator.Send(query, cancellationToken);
 
         return Ok(flashcard);
+    }
+
+    /// <summary>
+    /// Creates a new flashcard manually
+    /// </summary>
+    /// <param name="request">Flashcard question and answer</param>
+    /// <param name="cancellationToken">Cancellation token</param>
+    /// <returns>Created flashcard with assigned ID</returns>
+    /// <response code="201">Returns the newly created flashcard</response>
+    /// <response code="400">Validation failed - empty fields or exceeding length limits</response>
+    /// <response code="401">Unauthorized - invalid or missing token</response>
+    [HttpPost]
+    [ProducesResponseType(typeof(FlashcardDto), StatusCodes.Status201Created)]
+    [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+    public async Task<ActionResult<FlashcardDto>> CreateFlashcard(
+        [FromBody] CreateFlashcardRequestDto request,
+        CancellationToken cancellationToken)
+    {
+        var userId = User.GetUserId();
+
+        var command = new CreateManualFlashcardCommand(
+            userId,
+            request.Question,
+            request.Answer);
+
+        var flashcard = await _mediator.Send(command, cancellationToken);
+
+        return CreatedAtAction(
+            nameof(GetFlashcard),
+            new { id = flashcard.Id },
+            flashcard);
     }
 
     /// <summary>
