@@ -2,6 +2,7 @@ using _10xdevs.Api.Extensions;
 using _10xdevs.Application.Commands.Flashcards.CompleteReview;
 using _10xdevs.Application.Commands.Flashcards.CreateManualFlashcard;
 using _10xdevs.Application.Commands.Flashcards.GenerateFlashcards;
+using _10xdevs.Application.Commands.Flashcards.UpdateFlashcard;
 using _10xdevs.Application.DTOs.Flashcards;
 using _10xdevs.Application.Queries.Flashcards.GetFlashcardById;
 using _10xdevs.Application.Queries.Flashcards.GetUserFlashcards;
@@ -22,8 +23,8 @@ public class FlashcardsController : ControllerBase
 
     public FlashcardsController(IMediator mediator, ILogger<FlashcardsController> logger)
     {
-        _mediator = mediator ?? throw new ArgumentNullException(nameof(mediator));
-        _logger = logger ?? throw new ArgumentNullException(nameof(logger));
+        _mediator = mediator;
+        _logger = logger;
     }
 
     /// <summary>
@@ -135,6 +136,40 @@ public class FlashcardsController : ControllerBase
             nameof(GetFlashcard),
             new { id = flashcard.Id },
             flashcard);
+    }
+
+    /// <summary>
+    /// Updates an existing flashcard's question and/or answer
+    /// </summary>
+    /// <param name="id">Flashcard identifier</param>
+    /// <param name="request">Updated question and answer</param>
+    /// <param name="cancellationToken">Cancellation token</param>
+    /// <returns>Updated flashcard with modified timestamp</returns>
+    /// <response code="200">Returns the updated flashcard</response>
+    /// <response code="400">Validation failed - empty fields or exceeding length limits</response>
+    /// <response code="401">Unauthorized - invalid or missing token</response>
+    /// <response code="404">Not found - flashcard doesn't exist, is deleted, or belongs to another user</response>
+    [HttpPut("{id}")]
+    [ProducesResponseType(typeof(FlashcardDto), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+    [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status404NotFound)]
+    public async Task<ActionResult<FlashcardDto>> UpdateFlashcard(
+        int id,
+        [FromBody] UpdateFlashcardRequestDto request,
+        CancellationToken cancellationToken)
+    {
+        var userId = User.GetUserId();
+
+        var command = new UpdateFlashcardCommand(
+            id,
+            userId,
+            request.Question,
+            request.Answer);
+
+        var flashcard = await _mediator.Send(command, cancellationToken);
+
+        return Ok(flashcard);
     }
 
     /// <summary>
