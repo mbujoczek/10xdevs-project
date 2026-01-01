@@ -273,17 +273,6 @@ if (source != 0 && source != 1)
 // Returns 401 Unauthorized with standard problem details
 ```
 
-**Scenario 2:** Missing UserId claim
-
-```csharp
-var userId = User.GetUserId(); // ClaimsPrincipal extension
-if (!userId.HasValue)
-{
-    _logger.LogWarning("Failed to extract UserId from JWT token");
-    return Unauthorized();
-}
-```
-
 ### System Errors (500)
 
 **Scenario:** Database connection failure, unexpected exceptions

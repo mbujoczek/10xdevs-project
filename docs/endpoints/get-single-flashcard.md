@@ -264,14 +264,6 @@ WHERE Id = @flashcardId
 // Returns 401 Unauthorized with standard problem details
 ```
 
-**Scenario 3:** Missing UserId claim
-
-```csharp
-var userId = User.GetUserId(); // ClaimsPrincipal extension
-if (userId == null)
-    return Unauthorized("Invalid token claims");
-```
-
 ### Authorization Errors (403)
 
 **Scenario:** Flashcard belongs to different user
@@ -390,6 +382,7 @@ public class ForbiddenException : Exception
    }
    ```
 3. Create `GetFlashcardByIdQueryHandler.cs`:
+
    ```csharp
    public class GetFlashcardByIdQueryHandler
        : IRequestHandler<GetFlashcardByIdQuery, FlashcardDto>
@@ -490,6 +483,7 @@ public class ForbiddenException : Exception
 ### Step 5: Create Controller Endpoint
 
 1. Update `Api/Controllers/FlashcardsController.cs`:
+
    ```csharp
    [HttpGet("{id}")]
    [Authorize]
