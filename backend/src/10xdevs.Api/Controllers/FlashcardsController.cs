@@ -2,6 +2,8 @@ using _10xdevs.Api.Extensions;
 using _10xdevs.Application.Commands.Flashcards.CompleteReview;
 using _10xdevs.Application.Commands.Flashcards.GenerateFlashcards;
 using _10xdevs.Application.DTOs.Flashcards;
+using _10xdevs.Application.Queries.Flashcards.GetUserFlashcards;
+using _10xdevs.Domain.Enums;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -20,6 +22,64 @@ public class FlashcardsController : ControllerBase
     {
         _mediator = mediator ?? throw new ArgumentNullException(nameof(mediator));
         _logger = logger ?? throw new ArgumentNullException(nameof(logger));
+    }
+
+    /// <summary>
+    /// Retrieves all active flashcards for the authenticated user with optional filtering
+    /// </summary>
+    /// <param name="status">Filter by status (0=Not Applicable, 1=Accepted, 2=Edited). Can specify multiple.</param>
+    /// <param name="source">Filter by source (0=AI, 1=Manual)</param>
+    /// <param name="cancellationToken">Cancellation token</param>
+    /// <returns>List of flashcards matching the criteria</returns>
+    /// <response code="200">Flashcards retrieved successfully</response>
+    /// <response code="400">Invalid query parameter values</response>
+    /// <response code="401">Unauthorized - invalid or missing token</response>
+    [HttpGet]
+    [ProducesResponseType(typeof(ListFlashcardsResponseDto), StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+    public async Task<ActionResult<ListFlashcardsResponseDto>> GetFlashcards(
+        [FromQuery] List<int>? status,
+        [FromQuery] int? source,
+        CancellationToken cancellationToken)
+    {
+        var userId = User.GetUserId();
+        if (!userId.HasValue)
+        {
+            _logger.LogWarning("Failed to extract UserId from JWT token");
+            return Unauthorized();
+        }
+
+        List<FlashcardStatus>? statusFilter = null;
+        if (status != null && status.Any())
+        {
+            if (status.Any(s => !Enum.IsDefined(typeof(FlashcardStatus), s) || s == (int)FlashcardStatus.Deleted))
+            {
+                return BadRequest("Status must be 0 (Not Applicable), 1 (Accepted), or 2 (Edited)");
+            }
+            statusFilter = status.Select(s => (FlashcardStatus)s).ToList();
+        }
+
+        FlashcardSource? sourceFilter = null;
+        if (source.HasValue)
+        {
+            if (!Enum.IsDefined(typeof(FlashcardSource), source.Value))
+            {
+                return BadRequest("Source must be 0 (AI) or 1 (Manual)");
+            }
+            sourceFilter = (FlashcardSource)source.Value;
+        }
+
+        var query = new GetUserFlashcardsQuery
+        {
+            UserId = userId.Value,
+            StatusFilter = statusFilter,
+            SourceFilter = sourceFilter
+        };
+
+        var response = await _mediator.Send(query, cancellationToken);
+
+        return Ok(response);
     }
 
     /// <summary>

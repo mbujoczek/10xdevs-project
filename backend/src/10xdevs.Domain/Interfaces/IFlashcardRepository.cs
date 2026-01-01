@@ -1,4 +1,5 @@
 using _10xdevs.Domain.Entities;
+using _10xdevs.Domain.Enums;
 
 namespace _10xdevs.Domain.Interfaces;
 
@@ -10,5 +11,11 @@ public interface IFlashcardRepository
 
     Task<List<Flashcard>> CreateRangeAsync(
         List<Flashcard> flashcards,
+        CancellationToken cancellationToken = default);
+
+    Task<List<Flashcard>> GetByUserIdAsync(
+        int userId,
+        List<FlashcardStatus>? statusFilter = null,
+        FlashcardSource? sourceFilter = null,
         CancellationToken cancellationToken = default);
 }
