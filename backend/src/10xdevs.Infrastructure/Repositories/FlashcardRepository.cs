@@ -54,4 +54,16 @@ public class FlashcardRepository : IFlashcardRepository
 
         return await query.ToListAsync(cancellationToken);
     }
+
+    public async Task<Flashcard?> GetByIdAsync(
+        int flashcardId,
+        int userId,
+        CancellationToken cancellationToken = default)
+    {
+        return await _context.Flashcards
+            .Where(f => f.Id == flashcardId
+                     && f.UserId == userId
+                     && f.Status != FlashcardStatus.Deleted)
+            .FirstOrDefaultAsync(cancellationToken);
+    }
 }

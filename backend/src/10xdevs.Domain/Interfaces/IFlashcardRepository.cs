@@ -18,4 +18,9 @@ public interface IFlashcardRepository
         List<FlashcardStatus>? statusFilter = null,
         FlashcardSource? sourceFilter = null,
         CancellationToken cancellationToken = default);
+
+    Task<Flashcard?> GetByIdAsync(
+        int flashcardId,
+        int userId,
+        CancellationToken cancellationToken = default);
 }

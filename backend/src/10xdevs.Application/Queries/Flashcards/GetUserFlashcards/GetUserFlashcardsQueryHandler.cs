@@ -28,7 +28,7 @@ public class GetUserFlashcardsQueryHandler : IRequestHandler<GetUserFlashcardsQu
     {
         _logger.LogInformation(
             "Retrieving flashcards for user {UserId} with status filter {StatusFilter} and source filter {SourceFilter}",
-            request.UserId, 
+            request.UserId,
             request.StatusFilter != null ? string.Join(", ", request.StatusFilter) : "none",
             request.SourceFilter?.ToString() ?? "none");
 

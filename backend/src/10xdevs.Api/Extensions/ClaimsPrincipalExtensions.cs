@@ -11,14 +11,14 @@ public static class ClaimsPrincipalExtensions
     /// Extracts the UserId from JWT claims.
     /// </summary>
     /// <param name="principal">The ClaimsPrincipal from the current user context</param>
-    /// <returns>The UserId if found and valid, null otherwise</returns>
-    public static int? GetUserId(this ClaimsPrincipal principal)
+    /// <returns>The UserId if found and valid, otherwise 0</returns>
+    public static int GetUserId(this ClaimsPrincipal principal)
     {
         var userIdClaim = principal.FindFirst(ClaimTypes.NameIdentifier);
 
         if (userIdClaim == null || !int.TryParse(userIdClaim.Value, out int userId))
         {
-            return null;
+            return 0;
         }
 
         return userId;

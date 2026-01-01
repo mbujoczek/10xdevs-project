@@ -2,6 +2,7 @@ using _10xdevs.Api.Extensions;
 using _10xdevs.Application.Commands.Flashcards.CompleteReview;
 using _10xdevs.Application.Commands.Flashcards.GenerateFlashcards;
 using _10xdevs.Application.DTOs.Flashcards;
+using _10xdevs.Application.Queries.Flashcards.GetFlashcardById;
 using _10xdevs.Application.Queries.Flashcards.GetUserFlashcards;
 using _10xdevs.Domain.Enums;
 using MediatR;
@@ -43,13 +44,6 @@ public class FlashcardsController : ControllerBase
         [FromQuery] int? source,
         CancellationToken cancellationToken)
     {
-        var userId = User.GetUserId();
-        if (!userId.HasValue)
-        {
-            _logger.LogWarning("Failed to extract UserId from JWT token");
-            return Unauthorized();
-        }
-
         List<FlashcardStatus>? statusFilter = null;
         if (status != null && status.Any())
         {
@@ -72,7 +66,7 @@ public class FlashcardsController : ControllerBase
 
         var query = new GetUserFlashcardsQuery
         {
-            UserId = userId.Value,
+            UserId = User.GetUserId(),
             StatusFilter = statusFilter,
             SourceFilter = sourceFilter
         };
@@ -80,6 +74,34 @@ public class FlashcardsController : ControllerBase
         var response = await _mediator.Send(query, cancellationToken);
 
         return Ok(response);
+    }
+
+    /// <summary>
+    /// Retrieves a single flashcard by ID
+    /// </summary>
+    /// <param name="id">Unique flashcard identifier</param>
+    /// <param name="cancellationToken">Cancellation token</param>
+    /// <returns>Flashcard details with full metadata</returns>
+    /// <response code="200">Returns the flashcard details</response>
+    /// <response code="401">Unauthorized - invalid or missing token</response>
+    /// <response code="404">Not found - flashcard doesn't exist or is deleted</response>
+    [HttpGet("{id}")]
+    [ProducesResponseType(typeof(FlashcardDto), StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+    [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status404NotFound)]
+    public async Task<ActionResult<FlashcardDto>> GetFlashcard(
+        int id,
+        CancellationToken cancellationToken)
+    {
+        var query = new GetFlashcardByIdQuery
+        {
+            FlashcardId = id,
+            UserId = User.GetUserId()
+        };
+
+        var flashcard = await _mediator.Send(query, cancellationToken);
+
+        return Ok(flashcard);
     }
 
     /// <summary>
@@ -101,32 +123,24 @@ public class FlashcardsController : ControllerBase
         [FromBody] GenerateFlashcardsRequestDto request,
         CancellationToken cancellationToken)
     {
-        // Extract UserId from JWT claims
         var userId = User.GetUserId();
-        if (!userId.HasValue)
-        {
-            _logger.LogWarning("Failed to extract UserId from JWT token");
-            return Unauthorized();
-        }
 
         _logger.LogInformation(
             "Received flashcard generation request from UserId: {UserId}, Language: {Language}",
-            userId.Value, request.Language);
+            userId, request.Language);
 
-        // Create command
         var command = new GenerateFlashcardsCommand
         {
-            UserId = userId.Value,
+            UserId = userId,
             InputText = request.InputText,
             Language = request.Language ?? "en"
         };
 
-        // Send command to MediatR
         var response = await _mediator.Send(command, cancellationToken);
 
         _logger.LogInformation(
             "Successfully generated flashcards for UserId: {UserId}, EventId: {EventId}",
-            userId.Value, response.GenerationEventId);
+            userId, response.GenerationEventId);
 
         // Return 201 Created
         return Created($"/api/flashcards/generation/{response.GenerationEventId}", response);
@@ -157,32 +171,24 @@ public class FlashcardsController : ControllerBase
         [FromBody] CompleteReviewRequestDto request,
         CancellationToken cancellationToken)
     {
-        // Validate model state
         if (!ModelState.IsValid)
         {
             _logger.LogWarning("Invalid model state for CompleteReview request");
             return BadRequest(ModelState);
         }
 
-        // Extract UserId from JWT claims
         var userId = User.GetUserId();
-        if (!userId.HasValue)
-        {
-            _logger.LogWarning("Failed to extract UserId from JWT token");
-            return Unauthorized();
-        }
 
         _logger.LogInformation(
             "Received complete review request from UserId: {UserId}, EventId: {EventId}",
-            userId.Value, eventId);
+            userId, eventId);
 
-        // Create and send command
-        var command = new CompleteReviewCommand(eventId, userId.Value, request);
+        var command = new CompleteReviewCommand(eventId, userId, request);
         var response = await _mediator.Send(command, cancellationToken);
 
         _logger.LogInformation(
             "Successfully completed review for UserId: {UserId}, EventId: {EventId}, SavedCount: {SavedCount}",
-            userId.Value, eventId, response.SavedFlashcardsCount);
+            userId, eventId, response.SavedFlashcardsCount);
 
         return Ok(response);
     }
