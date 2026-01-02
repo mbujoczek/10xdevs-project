@@ -10,6 +10,9 @@ using _10xdevs.Infrastructure.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.Configure<StatisticsOptions>(
+    builder.Configuration.GetSection("Statistics"));
+
 // Add services to the container.
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();

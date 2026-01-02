@@ -1,4 +1,5 @@
 using _10xdevs.Domain.Entities;
+using _10xdevs.Domain.ValueObjects;
 
 namespace _10xdevs.Domain.Interfaces;
 
@@ -14,5 +15,8 @@ public interface IFlashcardGenerationEventRepository
 
     Task UpdateAsync(
         FlashcardGenerationEvent generationEvent,
+        CancellationToken cancellationToken = default);
+
+    Task<GlobalGenerationStatistics> GetGlobalStatisticsAsync(
         CancellationToken cancellationToken = default);
 }
