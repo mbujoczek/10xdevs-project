@@ -7,7 +7,7 @@ using _10xdevs.Application.DTOs.Auth;
 namespace _10xdevs.Api.Controllers;
 
 [ApiController]
-[Route("api/[controller]")]
+[Route("api/auth")]
 public class AuthController : ControllerBase
 {
     private readonly IMediator _mediator;

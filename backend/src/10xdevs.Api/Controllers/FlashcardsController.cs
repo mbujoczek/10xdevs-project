@@ -15,7 +15,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace _10xdevs.Api.Controllers;
 
 [ApiController]
-[Route("api/[controller]")]
+[Route("api/flashcards")]
 [Authorize]
 public class FlashcardsController : ControllerBase
 {

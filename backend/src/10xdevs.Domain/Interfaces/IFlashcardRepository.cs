@@ -23,4 +23,8 @@ public interface IFlashcardRepository
         int flashcardId,
         int userId,
         CancellationToken cancellationToken = default);
+
+    Task<IReadOnlyList<Flashcard>> GetDueFlashcardsAsync(
+        int userId,
+        CancellationToken cancellationToken = default);
 }

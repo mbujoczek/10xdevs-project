@@ -7,6 +7,4 @@ public class RateFlashcardRequestDto
 {
     [Required]
     public SRSGrade Grade { get; set; }
-
-    public DateTime? ReviewedAtUtc { get; set; }
 }

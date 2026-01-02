@@ -66,4 +66,18 @@ public class FlashcardRepository : IFlashcardRepository
                      && f.Status != FlashcardStatus.Deleted)
             .FirstOrDefaultAsync(cancellationToken);
     }
+
+    public async Task<IReadOnlyList<Flashcard>> GetDueFlashcardsAsync(
+        int userId,
+        CancellationToken cancellationToken = default)
+    {
+        var currentUtcTime = DateTime.UtcNow;
+
+        return await _context.Flashcards
+            .Where(f => f.UserId == userId
+                     && f.Status != FlashcardStatus.Deleted
+                     && (f.SRSNextRepetitionDate == null || f.SRSNextRepetitionDate <= currentUtcTime))
+            .OrderBy(f => f.SRSNextRepetitionDate)
+            .ToListAsync(cancellationToken);
+    }
 }

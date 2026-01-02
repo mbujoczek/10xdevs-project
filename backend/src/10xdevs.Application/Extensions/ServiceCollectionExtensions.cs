@@ -8,10 +8,10 @@ public static class ServiceCollectionExtensions
 {
     public static IServiceCollection AddApplicationServices(this IServiceCollection services)
     {
-        // Register FluentValidation validators
         services.AddValidatorsFromAssemblyContaining<AssemblyReference>();
 
-        // Register MediatR pipeline behaviors
+        services.AddAutoMapper(typeof(AssemblyReference).Assembly);
+
         services.AddMediatR(cfg =>
         {
             cfg.RegisterServicesFromAssembly(typeof(AssemblyReference).Assembly);
