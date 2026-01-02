@@ -19,4 +19,19 @@ public class Flashcard
     public DateTime UpdatedAtUtc { get; set; }
 
     public User User { get; set; } = null!;
+
+    public void UpdateSRSParameters(
+        int interval,
+        int repetitions,
+        decimal easeFactor,
+        DateTime nextRepetitionDate,
+        SRSGrade lastGrade)
+    {
+        SRSInterval = interval;
+        SRSRepetitions = repetitions;
+        SRSEaseFactor = easeFactor;
+        SRSNextRepetitionDate = nextRepetitionDate;
+        SRSLastGrade = lastGrade;
+        UpdatedAtUtc = DateTime.UtcNow;
+    }
 }

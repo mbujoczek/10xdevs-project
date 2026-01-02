@@ -1,4 +1,5 @@
 using _10xdevs.Application.DTOs.Flashcards;
+using _10xdevs.Application.DTOs.Learning;
 using _10xdevs.Domain.Entities;
 using AutoMapper;
 
@@ -9,5 +10,6 @@ public class FlashcardMappingProfile : Profile
     public FlashcardMappingProfile()
     {
         CreateMap<Flashcard, FlashcardDto>();
+        CreateMap<Flashcard, RateFlashcardResponseDto>();
     }
 }

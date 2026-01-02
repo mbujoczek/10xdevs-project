@@ -20,6 +20,7 @@ public static class ServiceCollectionExtensions
         // Register services
         services.AddSingleton<IPasswordHashingService, PasswordHashingService>();
         services.AddSingleton<IJwtTokenService, JwtTokenService>();
+        services.AddScoped<ISpacedRepetitionService, SpacedRepetitionService>();
 
         // Register AI service with HttpClient
         services.AddHttpClient<IFlashcardAIService, FlashcardAIService>((serviceProvider, client) =>
