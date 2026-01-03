@@ -1,5 +1,5 @@
 namespace _10xdevs.Application;
 
-public static class AssemblyReference
+public class AssemblyReference
 {
 }

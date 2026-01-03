@@ -8,8 +8,11 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
 {
     public void Configure(EntityTypeBuilder<User> builder)
     {
-        // Table name
-        builder.ToTable("Users");
+        // Table name with trigger declaration
+        builder.ToTable("Users", tb =>
+        {
+            tb.HasTrigger("TR_Users_UpdatedAtUtc");
+        });
 
         // Primary key
         builder.HasKey(u => u.Id);
