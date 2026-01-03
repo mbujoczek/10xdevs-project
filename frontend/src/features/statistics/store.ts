@@ -3,7 +3,7 @@ import type { GenerationAcceptanceResponse } from '@/types/statistics.types'
 import { defineStore } from 'pinia'
 import { computed, ref } from 'vue'
 
-export const useStatisticsStore = defineStore('statisticsStore', () => {
+export const useStatisticsStore = defineStore('statistics', () => {
   const acceptanceData = ref<GenerationAcceptanceResponse | null>(null)
 
   const hasData = computed(() => acceptanceData.value !== null)

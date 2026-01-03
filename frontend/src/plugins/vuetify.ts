@@ -22,6 +22,7 @@ const vuetify = createVuetify({
           warning: '#ff9800',
           info: '#2196f3',
           success: '#3A9D5D',
+          cardBackground: '#f9f9f9',
         },
       },
       dark: {
@@ -33,6 +34,7 @@ const vuetify = createVuetify({
           warning: '#ff9800',
           info: '#2196f3',
           success: '#3A9D5D',
+          cardBackground: '#333333',
         },
       },
     },

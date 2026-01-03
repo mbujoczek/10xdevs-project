@@ -52,12 +52,7 @@ export const getFlashcard = async (id: number): Promise<Flashcard> => {
   return response.data
 }
 
-export const listUserFlashcards = async (
-  page: number = 1,
-  pageSize: number = 50,
-): Promise<ListFlashcardsResponse> => {
-  const response = await api.get<ListFlashcardsResponse>('/flashcards', {
-    params: { page, pageSize },
-  })
+export const listUserFlashcards = async (): Promise<ListFlashcardsResponse> => {
+  const response = await api.get<ListFlashcardsResponse>('/flashcards')
   return response.data
 }

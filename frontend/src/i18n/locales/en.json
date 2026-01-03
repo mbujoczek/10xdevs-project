@@ -124,6 +124,55 @@
             "usernameExists": "Username is already taken. Choose another one."
         }
     },
+    "flashcards": {
+        "title": "My Flashcards",
+        "actions": {
+            "createFlashcard": "Create Flashcard",
+            "generateFromText": "Generate from Text"
+        },
+        "emptyState": {
+            "title": "No flashcards yet",
+            "description": "Start by creating a flashcard manually or generate them from your study material.",
+            "createButton": "Create Flashcard",
+            "generateButton": "Generate from Text"
+        },
+        "card": {
+            "question": "Question",
+            "answer": "Answer",
+            "sourceAI": "AI Generated",
+            "sourceManual": "Manual",
+            "statusAccepted": "Accepted",
+            "statusEdited": "Edited",
+            "statusDeleted": "Deleted",
+            "editTooltip": "Edit flashcard",
+            "deleteTooltip": "Delete flashcard"
+        },
+        "createDialog": {
+            "title": "Create Flashcard"
+        },
+        "editDialog": {
+            "title": "Edit Flashcard"
+        },
+        "deleteDialog": {
+            "title": "Delete Flashcard",
+            "message": "Are you sure you want to delete this flashcard? This action cannot be undone."
+        },
+        "form": {
+            "question": "Question",
+            "answer": "Answer"
+        },
+        "validation": {
+            "questionRequired": "Question is required",
+            "questionMaxLength": "Question must not exceed 500 characters",
+            "answerRequired": "Answer is required",
+            "answerMaxLength": "Answer must not exceed 500 characters"
+        }
+    },
+    "common": {
+        "cancel": "Cancel",
+        "save": "Save",
+        "delete": "Delete"
+    },
     "validation": {
         "required": "This field is required",
         "minLength": "Minimum {min} characters required",

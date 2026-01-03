@@ -124,6 +124,55 @@
             "usernameExists": "Nazwa użytkownika jest już zajęta. Wybierz inną."
         }
     },
+    "flashcards": {
+        "title": "Moje Fiszki",
+        "actions": {
+            "createFlashcard": "Utwórz Fiszkę",
+            "generateFromText": "Generuj z Tekstu"
+        },
+        "emptyState": {
+            "title": "Nie masz jeszcze fiszek",
+            "description": "Zacznij od ręcznego utworzenia fiszki lub wygeneruj je z materiału do nauki.",
+            "createButton": "Utwórz Fiszkę",
+            "generateButton": "Generuj z Tekstu"
+        },
+        "card": {
+            "question": "Pytanie",
+            "answer": "Odpowiedź",
+            "sourceAI": "Wygenerowane przez AI",
+            "sourceManual": "Ręcznie",
+            "statusAccepted": "Zaakceptowana",
+            "statusEdited": "Edytowana",
+            "statusDeleted": "Usunięta",
+            "editTooltip": "Edytuj fiszkę",
+            "deleteTooltip": "Usuń fiszkę"
+        },
+        "createDialog": {
+            "title": "Utwórz Fiszkę"
+        },
+        "editDialog": {
+            "title": "Edytuj Fiszkę"
+        },
+        "deleteDialog": {
+            "title": "Usuń Fiszkę",
+            "message": "Czy na pewno chcesz usunąć tę fiszkę? Tej operacji nie można cofnąć."
+        },
+        "form": {
+            "question": "Pytanie",
+            "answer": "Odpowiedź"
+        },
+        "validation": {
+            "questionRequired": "Pytanie jest wymagane",
+            "questionMaxLength": "Pytanie nie może przekraczać 500 znaków",
+            "answerRequired": "Odpowiedź jest wymagana",
+            "answerMaxLength": "Odpowiedź nie może przekraczać 500 znaków"
+        }
+    },
+    "common": {
+        "cancel": "Anuluj",
+        "save": "Zapisz",
+        "delete": "Usuń"
+    },
     "validation": {
         "required": "To pole jest wymagane",
         "minLength": "Wymagane minimum {min} znaków",

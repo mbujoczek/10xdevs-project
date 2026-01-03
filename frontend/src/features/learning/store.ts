@@ -3,7 +3,7 @@ import type { Flashcard } from '@/types/flashcards.types'
 import { defineStore } from 'pinia'
 import { computed, ref } from 'vue'
 
-export const useLearningStore = defineStore('learningStore', () => {
+export const useLearningStore = defineStore('learning', () => {
   const dueFlashcards = ref<Flashcard[]>([])
   const totalDueCount = ref<number>(0)
 

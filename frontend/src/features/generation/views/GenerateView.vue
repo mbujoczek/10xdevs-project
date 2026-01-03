@@ -54,11 +54,11 @@ const handleGenerate = async () => {
 </script>
 
 <template>
-  <v-container max-width="60em">
+  <v-container max-width="70em">
     <v-row>
       <v-col cols="12">
         <v-card>
-          <v-card-title class="text-h4">
+          <v-card-title class="text-h4 pa-4">
             {{ t('generate.title') }}
           </v-card-title>
           <v-card-text>

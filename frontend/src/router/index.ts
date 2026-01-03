@@ -47,7 +47,7 @@ const router = createRouter({
         {
           path: 'flashcards',
           name: 'flashcards',
-          component: () => import('@/features/dashboard/views/DashboardView.vue'), // TODO: Replace with FlashcardsView
+          component: () => import('@/features/flashcards/views/FlashcardsView.vue'),
         },
         {
           path: 'generate',

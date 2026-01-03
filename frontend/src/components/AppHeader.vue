@@ -67,19 +67,35 @@ const closeDrawer = () => {
 
   <v-navigation-drawer v-model="drawer" temporary app>
     <v-list nav density="compact">
-      <v-list-item :to="{ name: 'dashboard' }" @click="closeDrawer">
+      <v-list-item
+        :to="{ name: 'dashboard' }"
+        :active="$route.name === 'dashboard'"
+        @click="closeDrawer"
+      >
         <v-list-item-title>{{ t('nav.dashboard') }}</v-list-item-title>
       </v-list-item>
 
-      <v-list-item :to="{ name: 'flashcards' }" @click="closeDrawer">
+      <v-list-item
+        :to="{ name: 'flashcards' }"
+        :active="$route.name === 'flashcards'"
+        @click="closeDrawer"
+      >
         <v-list-item-title>{{ t('nav.myFlashcards') }}</v-list-item-title>
       </v-list-item>
 
-      <v-list-item :to="{ name: 'generate' }" @click="closeDrawer">
+      <v-list-item
+        :to="{ name: 'generate' }"
+        :active="$route.name === 'generate' || $route.name === 'review'"
+        @click="closeDrawer"
+      >
         <v-list-item-title>{{ t('nav.generate') }}</v-list-item-title>
       </v-list-item>
 
-      <v-list-item :to="{ name: 'statistics' }" @click="closeDrawer">
+      <v-list-item
+        :to="{ name: 'statistics' }"
+        :active="$route.name === 'statistics'"
+        @click="closeDrawer"
+      >
         <v-list-item-title>{{ t('nav.statistics') }}</v-list-item-title>
       </v-list-item>
 
