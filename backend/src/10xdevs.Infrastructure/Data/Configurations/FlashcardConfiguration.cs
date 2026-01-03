@@ -40,7 +40,7 @@ public class FlashcardConfiguration : IEntityTypeConfiguration<Flashcard>
         // Source - stored as INT
         builder.Property(f => f.Source)
             .IsRequired()
-            .HasDefaultValue(FlashcardSource.Manual)
+            .HasDefaultValue(FlashcardSource.AI)
             .HasConversion<int>();
 
         // Status - stored as INT
