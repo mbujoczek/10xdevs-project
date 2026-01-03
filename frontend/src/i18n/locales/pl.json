@@ -1,4 +1,24 @@
 {
+    "app": {
+        "name": "Generator Fiszek AI"
+    },
+    "nav": {
+        "dashboard": "Panel główny",
+        "myFlashcards": "Moje Fiszki",
+        "generate": "Generuj",
+        "statistics": "Statystyki",
+        "logout": "Wyloguj"
+    },
+    "dashboard": {
+        "welcome": "Witaj, {username}!",
+        "dueCount": "{count} fiszek do powtórki",
+        "noDue": "Brak fiszek do powtórki",
+        "actions": {
+            "startLearning": "Rozpocznij naukę",
+            "generate": "Generuj fiszki",
+            "myFlashcards": "Moje Fiszki"
+        }
+    },
     "auth": {
         "login": {
             "title": "Zaloguj się",

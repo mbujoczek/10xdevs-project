@@ -1,4 +1,24 @@
 {
+    "app": {
+        "name": "AI Flashcard Generator"
+    },
+    "nav": {
+        "dashboard": "Dashboard",
+        "myFlashcards": "My Flashcards",
+        "generate": "Generate",
+        "statistics": "Statistics",
+        "logout": "Logout"
+    },
+    "dashboard": {
+        "welcome": "Welcome, {username}!",
+        "dueCount": "{count} flashcard(s) due for review",
+        "noDue": "No flashcards due for review",
+        "actions": {
+            "startLearning": "Start Learning",
+            "generate": "Generate Flashcards",
+            "myFlashcards": "My Flashcards"
+        }
+    },
     "auth": {
         "login": {
             "title": "Log In",

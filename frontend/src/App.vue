@@ -7,13 +7,11 @@ const { isLoading } = storeToRefs(uiStore)
 </script>
 
 <template>
-  <v-app>
-    <v-overlay :model-value="isLoading" class="align-center justify-center" persistent>
-      <v-progress-circular color="primary" indeterminate size="64" />
-    </v-overlay>
+  <v-overlay :model-value="isLoading" class="align-center justify-center" persistent>
+    <v-progress-circular color="primary" indeterminate size="64" />
+  </v-overlay>
 
-    <router-view />
-  </v-app>
+  <router-view />
 </template>
 
 <style scoped></style>

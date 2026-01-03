@@ -1,3 +1,5 @@
+import AuthLayout from '@/layouts/AuthLayout.vue'
+import DefaultLayout from '@/layouts/DefaultLayout.vue'
 import { createRouter, createWebHistory } from 'vue-router'
 
 const router = createRouter({
@@ -5,15 +7,59 @@ const router = createRouter({
   routes: [
     {
       path: '/login',
-      name: 'login',
-      component: () => import('@/features/authentication/views/LoginView.vue'),
-      meta: { requiresGuest: true },
+      component: AuthLayout,
+      children: [
+        {
+          path: '',
+          name: 'login',
+          component: () => import('@/features/authentication/views/LoginView.vue'),
+          meta: { requiresGuest: true },
+        },
+      ],
     },
     {
       path: '/register',
-      name: 'register',
-      component: () => import('@/features/authentication/views/RegisterView.vue'),
-      meta: { requiresGuest: true },
+      component: AuthLayout,
+      children: [
+        {
+          path: '',
+          name: 'register',
+          component: () => import('@/features/authentication/views/RegisterView.vue'),
+          meta: { requiresGuest: true },
+        },
+      ],
+    },
+    {
+      path: '/',
+      component: DefaultLayout,
+      meta: { requiresAuth: true },
+      children: [
+        {
+          path: '',
+          name: 'dashboard',
+          component: () => import('@/features/dashboard/views/DashboardView.vue'),
+        },
+        {
+          path: 'learn',
+          name: 'learn',
+          component: () => import('@/features/dashboard/views/DashboardView.vue'), // TODO: Replace with LearningSessionView
+        },
+        {
+          path: 'flashcards',
+          name: 'flashcards',
+          component: () => import('@/features/dashboard/views/DashboardView.vue'), // TODO: Replace with FlashcardsView
+        },
+        {
+          path: 'generate',
+          name: 'generate',
+          component: () => import('@/features/dashboard/views/DashboardView.vue'), // TODO: Replace with GenerateView
+        },
+        {
+          path: 'statistics',
+          name: 'statistics',
+          component: () => import('@/features/dashboard/views/DashboardView.vue'), // TODO: Replace with StatisticsView
+        },
+      ],
     },
   ],
 })
@@ -22,7 +68,9 @@ router.beforeEach((to, from, next) => {
   const token = localStorage.getItem('authToken')
   const isAuthenticated = !!token
 
-  if (to.meta.requiresGuest && isAuthenticated) {
+  if (to.meta.requiresAuth && !isAuthenticated) {
+    next({ path: '/login' })
+  } else if (to.meta.requiresGuest && isAuthenticated) {
     next({ path: '/' })
   } else {
     next()
