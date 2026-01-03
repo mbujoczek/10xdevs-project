@@ -128,7 +128,7 @@ onBeforeRouteLeave((to, from, next) => {
     <v-row>
       <v-col cols="12">
         <v-card class="mb-4">
-          <v-card-title class="text-h4 pa-4">
+          <v-card-title class="text-h4 pa-4" style="white-space: normal; word-break: break-word">
             {{ t('review.title') }}
           </v-card-title>
           <v-card-text>

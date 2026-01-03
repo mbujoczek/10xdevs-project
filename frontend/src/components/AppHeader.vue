@@ -28,13 +28,13 @@ const closeDrawer = () => {
       <v-app-bar-nav-icon class="ml-2 d-md-none" @click="drawer = !drawer" />
     </template>
 
-    <v-toolbar-title class="mr-4 overflow-x">
+    <v-toolbar-title class="mr-4" style="max-width: 224px">
       {{ t('app.name') }}
     </v-toolbar-title>
 
     <v-spacer class="d-none d-md-flex" />
 
-    <div class="d-none d-md-flex">
+    <div class="d-none d-md-flex ga-2">
       <v-btn text :to="{ name: 'dashboard' }" :active="$route.name === 'dashboard'">
         {{ t('nav.dashboard') }}
       </v-btn>
@@ -115,3 +115,9 @@ const closeDrawer = () => {
     </v-list>
   </v-navigation-drawer>
 </template>
+
+<style scoped>
+:deep(.v-toolbar-title__placeholder) {
+  width: fit-content;
+}
+</style>

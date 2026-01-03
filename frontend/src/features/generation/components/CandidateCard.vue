@@ -42,7 +42,7 @@ const cardClass = computed(() => {
 
 <template>
   <v-card :color="cardColor" :variant="cardVariant" :class="cardClass" class="candidate-card mb-4">
-    <v-card-title class="text-h6">
+    <v-card-title class="text-h6" style="white-space: normal; word-break: break-word">
       {{ candidate.question }}
     </v-card-title>
 
