@@ -33,6 +33,23 @@
             "tooLong": "Tekst nie może przekraczać 10 000 znaków"
         }
     },
+    "statistics": {
+        "title": "Statystyki Generowania AI",
+        "loading": "Ładowanie statystyk...",
+        "successMetric": {
+            "met": "Metryka sukcesu osiągnięta! Wskaźnik akceptacji AI osiąga cel.",
+            "notMet": "Metryka sukcesu jeszcze nie osiągnięta. Wskaźnik akceptacji AI jest poniżej celu."
+        },
+        "metrics": {
+            "totalCandidates": "Wszystkie Kandydatki",
+            "acceptedWithoutEditing": "Zaakceptowane Bez Edycji",
+            "acceptedAfterEditing": "Zaakceptowane Po Edycji",
+            "rejected": "Odrzucone",
+            "acceptanceRate": "Wskaźnik Akceptacji",
+            "pureAcceptanceRate": "Czysty Wskaźnik Akceptacji",
+            "targetRate": "Docelowy Wskaźnik"
+        }
+    },
     "review": {
         "title": "Przejrzyj Wygenerowane Fiszki",
         "description": "Przejrzyj fiszki wygenerowane przez AI i zdecyduj, które zapisać. Możesz zaakceptować je bez zmian, edytować lub odrzucić.",

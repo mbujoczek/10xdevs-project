@@ -62,7 +62,7 @@ const router = createRouter({
         {
           path: 'statistics',
           name: 'statistics',
-          component: () => import('@/features/dashboard/views/DashboardView.vue'), // TODO: Replace with StatisticsView
+          component: () => import('@/features/statistics/views/StatisticsView.vue'),
         },
       ],
     },

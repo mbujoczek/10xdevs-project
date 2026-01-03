@@ -33,6 +33,23 @@
             "tooLong": "Text must not exceed 10,000 characters"
         }
     },
+    "statistics": {
+        "title": "AI Generation Statistics",
+        "loading": "Loading statistics...",
+        "successMetric": {
+            "met": "Success metric achieved! The AI acceptance rate meets the target.",
+            "notMet": "Success metric not yet achieved. The AI acceptance rate is below the target."
+        },
+        "metrics": {
+            "totalCandidates": "Total Candidates",
+            "acceptedWithoutEditing": "Accepted Without Editing",
+            "acceptedAfterEditing": "Accepted After Editing",
+            "rejected": "Rejected",
+            "acceptanceRate": "Acceptance Rate",
+            "pureAcceptanceRate": "Pure Acceptance Rate",
+            "targetRate": "Target Rate"
+        }
+    },
     "review": {
         "title": "Review Generated Flashcards",
         "description": "Review the AI-generated flashcards and decide which ones to save. You can accept them as-is, edit them, or reject them.",
