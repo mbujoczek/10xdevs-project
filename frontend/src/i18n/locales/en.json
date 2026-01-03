@@ -19,6 +19,75 @@
             "myFlashcards": "My Flashcards"
         }
     },
+    "generate": {
+        "title": "Generate Flashcards",
+        "description": "Paste your study material, lecture notes, or any text below (up to 10,000 characters). Our AI will analyze the content and generate flashcards to help you learn effectively.",
+        "form": {
+            "inputLabel": "Study Material",
+            "inputPlaceholder": "Paste your text here... (minimum 50 characters)",
+            "submitButton": "Generate Flashcards"
+        },
+        "errors": {
+            "required": "Please enter text to generate flashcards",
+            "tooShort": "Text must be at least 50 characters long for meaningful flashcard generation",
+            "tooLong": "Text must not exceed 10,000 characters"
+        }
+    },
+    "review": {
+        "title": "Review Generated Flashcards",
+        "description": "Review the AI-generated flashcards and decide which ones to save. You can accept them as-is, edit them, or reject them.",
+        "stats": {
+            "pending": "Pending",
+            "accepted": "Accepted",
+            "edited": "Edited",
+            "rejected": "Rejected"
+        },
+        "candidateCard": {
+            "accept": "Accept",
+            "edit": "Edit",
+            "reject": "Reject",
+            "status": {
+                "pending": "Pending",
+                "accepted": "Accepted",
+                "edited": "Edited",
+                "rejected": "Rejected"
+            }
+        },
+        "noCandidates": "No flashcards to review",
+        "finishButton": "Finish Review",
+        "confirmDialog": {
+            "title": "Confirm Action",
+            "acceptMessage": "Are you sure you want to accept this flashcard?",
+            "editMessage": "Are you sure you want to save these changes?",
+            "rejectMessage": "Are you sure you want to reject this flashcard?",
+            "cancel": "Cancel",
+            "confirm": "Confirm"
+        },
+        "editDialog": {
+            "title": "Edit Flashcard",
+            "questionLabel": "Question",
+            "answerLabel": "Answer",
+            "cancel": "Cancel",
+            "save": "Save",
+            "errors": {
+                "questionRequired": "Question is required",
+                "questionTooLong": "Question must not exceed 200 characters",
+                "answerRequired": "Answer is required",
+                "answerTooLong": "Answer must not exceed 500 characters"
+            }
+        },
+        "errors": {
+            "invalidEventId": "Invalid generation event ID",
+            "noActions": "Please review at least one flashcard before finishing",
+            "noCandidates": "No candidates found for this review. Please generate flashcards first."
+        },
+        "warnings": {
+            "unsavedChanges": "You have unsaved changes. Are you sure you want to leave?"
+        },
+        "success": {
+            "completed": "Review completed successfully! Saved {count} flashcard(s)."
+        }
+    },
     "auth": {
         "login": {
             "title": "Log In",

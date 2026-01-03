@@ -35,19 +35,23 @@ const closeDrawer = () => {
     <v-spacer class="d-none d-md-flex" />
 
     <div class="d-none d-md-flex">
-      <v-btn text :to="{ name: 'dashboard' }">
+      <v-btn text :to="{ name: 'dashboard' }" :active="$route.name === 'dashboard'">
         {{ t('nav.dashboard') }}
       </v-btn>
 
-      <v-btn text :to="{ name: 'flashcards' }">
+      <v-btn text :to="{ name: 'flashcards' }" :active="$route.name === 'flashcards'">
         {{ t('nav.myFlashcards') }}
       </v-btn>
 
-      <v-btn text :to="{ name: 'generate' }">
+      <v-btn
+        text
+        :to="{ name: 'generate' }"
+        :active="$route.name === 'generate' || $route.name === 'review'"
+      >
         {{ t('nav.generate') }}
       </v-btn>
 
-      <v-btn text :to="{ name: 'statistics' }">
+      <v-btn text :to="{ name: 'statistics' }" :active="$route.name === 'statistics'">
         {{ t('nav.statistics') }}
       </v-btn>
     </div>

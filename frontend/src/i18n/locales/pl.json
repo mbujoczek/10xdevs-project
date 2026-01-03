@@ -19,6 +19,75 @@
             "myFlashcards": "Moje Fiszki"
         }
     },
+    "generate": {
+        "title": "Generuj Fiszki",
+        "description": "Wklej poniżej swój materiał do nauki, notatki z wykładu lub dowolny tekst (maksymalnie 10 000 znaków). Nasza sztuczna inteligencja przeanalizuje treść i wygeneruje fiszki, które pomogą Ci w efektywnej nauce.",
+        "form": {
+            "inputLabel": "Materiał do nauki",
+            "inputPlaceholder": "Wklej tutaj swój tekst... (minimum 50 znaków)",
+            "submitButton": "Generuj Fiszki"
+        },
+        "errors": {
+            "required": "Wprowadź tekst, aby wygenerować fiszki",
+            "tooShort": "Tekst musi mieć co najmniej 50 znaków, aby wygenerować sensowne fiszki",
+            "tooLong": "Tekst nie może przekraczać 10 000 znaków"
+        }
+    },
+    "review": {
+        "title": "Przejrzyj Wygenerowane Fiszki",
+        "description": "Przejrzyj fiszki wygenerowane przez AI i zdecyduj, które zapisać. Możesz zaakceptować je bez zmian, edytować lub odrzucić.",
+        "stats": {
+            "pending": "Oczekujące",
+            "accepted": "Zaakceptowane",
+            "edited": "Edytowane",
+            "rejected": "Odrzucone"
+        },
+        "candidateCard": {
+            "accept": "Akceptuj",
+            "edit": "Edytuj",
+            "reject": "Odrzuć",
+            "status": {
+                "pending": "Oczekująca",
+                "accepted": "Zaakceptowana",
+                "edited": "Edytowana",
+                "rejected": "Odrzucona"
+            }
+        },
+        "noCandidates": "Brak fiszek do przejrzenia",
+        "finishButton": "Zakończ Przegląd",
+        "confirmDialog": {
+            "title": "Potwierdź Akcję",
+            "acceptMessage": "Czy na pewno chcesz zaakceptować tę fiszkę?",
+            "editMessage": "Czy na pewno chcesz zapisać te zmiany?",
+            "rejectMessage": "Czy na pewno chcesz odrzucić tę fiszkę?",
+            "cancel": "Anuluj",
+            "confirm": "Potwierdź"
+        },
+        "editDialog": {
+            "title": "Edytuj Fiszkę",
+            "questionLabel": "Pytanie",
+            "answerLabel": "Odpowiedź",
+            "cancel": "Anuluj",
+            "save": "Zapisz",
+            "errors": {
+                "questionRequired": "Pytanie jest wymagane",
+                "questionTooLong": "Pytanie nie może przekraczać 200 znaków",
+                "answerRequired": "Odpowiedź jest wymagana",
+                "answerTooLong": "Odpowiedź nie może przekraczać 500 znaków"
+            }
+        },
+        "errors": {
+            "invalidEventId": "Nieprawidłowy identyfikator zdarzenia generowania",
+            "noActions": "Przejrzyj co najmniej jedną fiszkę przed zakończeniem",
+            "noCandidates": "Nie znaleziono kandydatów do przeglądu. Wygeneruj najpierw fiszki."
+        },
+        "warnings": {
+            "unsavedChanges": "Masz niezapisane zmiany. Czy na pewno chcesz opuścić stronę?"
+        },
+        "success": {
+            "completed": "Przegląd zakończony pomyślnie! Zapisano {count} fiszek."
+        }
+    },
     "auth": {
         "login": {
             "title": "Zaloguj się",

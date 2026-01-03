@@ -52,7 +52,12 @@ const router = createRouter({
         {
           path: 'generate',
           name: 'generate',
-          component: () => import('@/features/dashboard/views/DashboardView.vue'), // TODO: Replace with GenerateView
+          component: () => import('@/features/generation/views/GenerateView.vue'),
+        },
+        {
+          path: 'review/:eventId',
+          name: 'review',
+          component: () => import('@/features/generation/views/ReviewView.vue'),
         },
         {
           path: 'statistics',
