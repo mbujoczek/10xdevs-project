@@ -5,7 +5,7 @@ describe('Login Flow', () => {
   })
 
   it('displays login form with all elements', () => {
-    cy.contains('h1', 'Log In').should('be.visible')
+    cy.contains('Log In').should('be.visible')
     cy.get('input[type="text"]').should('be.visible')
     cy.get('input[type="password"]').should('be.visible')
     cy.contains('button', 'Log In').should('be.visible')

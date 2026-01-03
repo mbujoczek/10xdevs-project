@@ -1,5 +1,11 @@
-import { loginUser } from '@/api/auth.api'
-import type { LoginRequest, LoginResponse, User } from '@/types/auth.types'
+import { loginUser, registerUser } from '@/api/auth.api'
+import type {
+  LoginRequest,
+  LoginResponse,
+  RegisterRequest,
+  RegisterResponse,
+  User,
+} from '@/types/auth.types'
 import { defineStore } from 'pinia'
 import { computed, ref } from 'vue'
 
@@ -32,6 +38,19 @@ export const useAuthStore = defineStore('authStore', () => {
     localStorage.setItem('authUser', JSON.stringify(user.value))
   }
 
+  const register = async (data: RegisterRequest): Promise<void> => {
+    const response: RegisterResponse = await registerUser(data)
+
+    user.value = {
+      id: response.id,
+      username: response.username,
+    }
+    token.value = response.token
+
+    localStorage.setItem('authToken', response.token)
+    localStorage.setItem('authUser', JSON.stringify(user.value))
+  }
+
   const logout = () => {
     user.value = null
     token.value = null
@@ -46,6 +65,7 @@ export const useAuthStore = defineStore('authStore', () => {
     token,
     isAuthenticated,
     login,
+    register,
     logout,
   }
 })

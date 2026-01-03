@@ -12,15 +12,19 @@
             "title": "Rejestracja",
             "username": "Nazwa użytkownika",
             "password": "Hasło",
-            "submit": "Zarejestruj",
+            "submit": "Zarejestruj się",
             "hasAccount": "Masz już konto?",
-            "login": "Zaloguj się"
+            "login": "Zaloguj się",
+            "usernameExists": "Nazwa użytkownika jest już zajęta. Wybierz inną."
         }
     },
     "validation": {
         "required": "To pole jest wymagane",
         "minLength": "Wymagane minimum {min} znaków",
-        "maxLength": "Maksymalnie {max} znaków"
+        "maxLength": "Maksymalnie {max} znaków",
+        "usernameMaxLength": "Nazwa użytkownika nie może przekraczać 50 znaków",
+        "noWhitespace": "Nazwa użytkownika nie może zawierać spacji",
+        "passwordMinLength": "Hasło musi mieć co najmniej 8 znaków"
     },
     "errors": {
         "api": {

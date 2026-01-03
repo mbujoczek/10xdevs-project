@@ -12,15 +12,19 @@
             "title": "Register",
             "username": "Username",
             "password": "Password",
-            "submit": "Register",
+            "submit": "Sign up",
             "hasAccount": "Already have an account?",
-            "login": "Log In"
+            "login": "Log In",
+            "usernameExists": "Username is already taken. Choose another one."
         }
     },
     "validation": {
         "required": "This field is required",
         "minLength": "Minimum {min} characters required",
-        "maxLength": "Maximum {max} characters allowed"
+        "maxLength": "Maximum {max} characters allowed",
+        "usernameMaxLength": "Username must not exceed 50 characters",
+        "noWhitespace": "Username cannot contain spaces",
+        "passwordMinLength": "Password must be at least 8 characters long"
     },
     "errors": {
         "api": {
