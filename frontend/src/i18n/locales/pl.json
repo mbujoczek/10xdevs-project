@@ -1,0 +1,42 @@
+{
+    "auth": {
+        "login": {
+            "title": "Zaloguj się",
+            "username": "Nazwa użytkownika",
+            "password": "Hasło",
+            "submit": "Zaloguj",
+            "noAccount": "Nie masz konta?",
+            "register": "Zarejestruj się"
+        },
+        "register": {
+            "title": "Rejestracja",
+            "username": "Nazwa użytkownika",
+            "password": "Hasło",
+            "submit": "Zarejestruj",
+            "hasAccount": "Masz już konto?",
+            "login": "Zaloguj się"
+        }
+    },
+    "validation": {
+        "required": "To pole jest wymagane",
+        "minLength": "Wymagane minimum {min} znaków",
+        "maxLength": "Maksymalnie {max} znaków"
+    },
+    "errors": {
+        "api": {
+            "invalidCredentials": "Nazwa użytkownika lub hasło są nieprawidłowe.",
+            "unauthorized": "Nie masz uprawnień do tego zasobu.",
+            "forbidden": "Nie masz uprawnień do wykonania tej operacji.",
+            "notFound": "Żądany zasób nie został znaleziony.",
+            "conflict": "Ta operacja jest w konflikcie z bieżącym stanem.",
+            "usernameExists": "Ta nazwa użytkownika jest już zajęta. Wybierz inną.",
+            "badRequest": "Nieprawidłowe żądanie. Sprawdź wprowadzone dane.",
+            "validationFailed": "Walidacja nie powiodła się. Popraw błędy i spróbuj ponownie.",
+            "aiServiceUnavailable": "Serwis AI jest obecnie niedostępny. Spróbuj ponownie później.",
+            "serviceUnavailable": "Serwis jest tymczasowo niedostępny. Spróbuj ponownie później.",
+            "internalServerError": "Wystąpił nieoczekiwany błąd serwera. Spróbuj ponownie później.",
+            "networkError": "Brak połączenia z siecią. Sprawdź połączenie internetowe.",
+            "genericError": "Wystąpił nieoczekiwany błąd. Spróbuj ponownie."
+        }
+    }
+}

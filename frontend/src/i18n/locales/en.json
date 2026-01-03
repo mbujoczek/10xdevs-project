@@ -1,0 +1,42 @@
+{
+    "auth": {
+        "login": {
+            "title": "Log In",
+            "username": "Username",
+            "password": "Password",
+            "submit": "Log In",
+            "noAccount": "Don't have an account?",
+            "register": "Register"
+        },
+        "register": {
+            "title": "Register",
+            "username": "Username",
+            "password": "Password",
+            "submit": "Register",
+            "hasAccount": "Already have an account?",
+            "login": "Log In"
+        }
+    },
+    "validation": {
+        "required": "This field is required",
+        "minLength": "Minimum {min} characters required",
+        "maxLength": "Maximum {max} characters allowed"
+    },
+    "errors": {
+        "api": {
+            "invalidCredentials": "Username or password is incorrect.",
+            "unauthorized": "You are not authorized to access this resource.",
+            "forbidden": "You don't have permission to perform this action.",
+            "notFound": "The requested resource was not found.",
+            "conflict": "This operation conflicts with the current state.",
+            "usernameExists": "This username is already taken. Please choose another one.",
+            "badRequest": "Invalid request. Please check your input.",
+            "validationFailed": "Validation failed. Please correct the errors and try again.",
+            "aiServiceUnavailable": "The AI service is currently unavailable. Please try again later.",
+            "serviceUnavailable": "The service is temporarily unavailable. Please try again later.",
+            "internalServerError": "An unexpected server error occurred. Please try again later.",
+            "networkError": "No network connection. Please check your internet connection.",
+            "genericError": "An unexpected error occurred. Please try again."
+        }
+    }
+}

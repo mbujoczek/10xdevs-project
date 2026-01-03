@@ -2,7 +2,13 @@
 export * from './enums'
 
 // Auth types
-export type { LoginRequest, LoginResponse, RegisterRequest, RegisterResponse } from './auth.types'
+export type {
+  LoginRequest,
+  LoginResponse,
+  RegisterRequest,
+  RegisterResponse,
+  User,
+} from './auth.types'
 
 // Flashcards types
 export type {

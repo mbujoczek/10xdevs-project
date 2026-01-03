@@ -1,11 +1,19 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { useUiStore } from '@/store/ui.store'
+import { storeToRefs } from 'pinia'
+
+const uiStore = useUiStore()
+const { isLoading } = storeToRefs(uiStore)
+</script>
 
 <template>
-  <h1>You did it!</h1>
-  <p>
-    Visit <a href="https://vuejs.org/" target="_blank" rel="noopener">vuejs.org</a> to read the
-    documentation
-  </p>
+  <v-app>
+    <v-overlay :model-value="isLoading" class="align-center justify-center" persistent>
+      <v-progress-circular color="primary" indeterminate size="64" />
+    </v-overlay>
+
+    <router-view />
+  </v-app>
 </template>
 
 <style scoped></style>

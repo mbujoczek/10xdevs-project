@@ -68,7 +68,6 @@ src/
 │       └── routes.ts   # Module route definitions
 ├── layouts/            # Page layouts (e.g., DefaultLayout.vue)
 ├── router/             # Vue Router configuration (index.ts)
-├── services/           # Business logic (e.g., validation.service.ts)
 ├── store/              # Main Pinia configuration (index.ts)
 ├── styles/             # Global styles, SCSS variables
 ├── types/              # Global TypeScript type definitions
@@ -96,9 +95,7 @@ src/
 
 - **`router/`**: Contains Vue Router configuration. The `index.ts` file aggregates routes defined in individual `features` modules and configures global navigation guards.
 
-- **`services/`**: Business logic layer. Services use functions from the `api/` directory to fetch data, then implement domain-specific logic (e.g., calculations, validations, data aggregation from multiple sources). They bridge raw data and its presentation in the user interface.
-
-- **`store/`**: Main Pinia configuration. The `index.ts` file creates the Pinia instance. Individual store modules (e.g., `auth.store.ts`) are located in their respective `features` directories.
+- **`store/`**: Main Pinia configuration. The `index.ts` file creates the Pinia instance. Individual store modules (e.g., `auth.store.ts`) are located in their respective `features` directories. Business logic that uses functions from the `api/` directory to fetch data and implement domain-specific logic resides here.
 
 - **`styles/`**: Global styles, SCSS/SASS variables, mixins, and functions that should be available throughout the application.
 
