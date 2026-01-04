@@ -168,6 +168,39 @@
             "answerMaxLength": "Answer must not exceed 500 characters"
         }
     },
+    "learning": {
+        "title": "Learning Session",
+        "question": "Question",
+        "answer": "Answer",
+        "showAnswer": "Show Answer",
+        "rateYourResponse": "Rate Your Response",
+        "grades": {
+            "completeBlackout": "Complete Blackout",
+            "incorrectResponse": "Incorrect",
+            "incorrectResponseRecalled": "Incorrect, Easy",
+            "correctWithDifficulty": "Correct, Hard",
+            "correctAfterHesitation": "Correct, Good",
+            "perfectResponse": "Perfect"
+        },
+        "emptyState": {
+            "title": "All Caught Up!",
+            "description": "You have no flashcards to review right now. Great job!",
+            "viewFlashcards": "View My Flashcards",
+            "generateFlashcards": "Generate New Flashcards"
+        },
+        "summary": {
+            "title": "Session Complete!",
+            "subtitle": "Well done! Here's your performance summary.",
+            "totalReviewed": "Flashcards Reviewed",
+            "averageRating": "Average Rating",
+            "duration": "Time Spent",
+            "ratingDistribution": "Rating Distribution",
+            "times": "times",
+            "returnToDashboard": "Return to Dashboard",
+            "noDataTitle": "No Session Data",
+            "noDataDescription": "No session data available. Please complete a learning session first."
+        }
+    },
     "common": {
         "cancel": "Cancel",
         "save": "Save",

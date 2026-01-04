@@ -168,6 +168,39 @@
             "answerMaxLength": "Odpowiedź nie może przekraczać 500 znaków"
         }
     },
+    "learning": {
+        "title": "Sesja Nauki",
+        "question": "Pytanie",
+        "answer": "Odpowiedź",
+        "showAnswer": "Pokaż Odpowiedź",
+        "rateYourResponse": "Oceń Swoją Odpowiedź",
+        "grades": {
+            "completeBlackout": "Kompletna Zapaść",
+            "incorrectResponse": "Niepoprawnie",
+            "incorrectResponseRecalled": "Niepoprawnie, Łatwe",
+            "correctWithDifficulty": "Poprawnie, Trudne",
+            "correctAfterHesitation": "Poprawnie, Dobre",
+            "perfectResponse": "Perfekcyjnie"
+        },
+        "emptyState": {
+            "title": "Wszystko Powtórzone!",
+            "description": "Nie masz teraz fiszek do powtórki. Świetna robota!",
+            "viewFlashcards": "Zobacz Moje Fiszki",
+            "generateFlashcards": "Generuj Nowe Fiszki"
+        },
+        "summary": {
+            "title": "Sesja Ukończona!",
+            "subtitle": "Świetna robota! Oto podsumowanie Twojej sesji.",
+            "totalReviewed": "Przejrzane Fiszki",
+            "averageRating": "Średnia Ocena",
+            "duration": "Czas Trwania",
+            "ratingDistribution": "Rozkład Ocen",
+            "times": "razy",
+            "returnToDashboard": "Wróć do Panelu",
+            "noDataTitle": "Brak Danych Sesji",
+            "noDataDescription": "Brak danych sesji. Najpierw ukończ sesję nauki."
+        }
+    },
     "common": {
         "cancel": "Anuluj",
         "save": "Zapisz",

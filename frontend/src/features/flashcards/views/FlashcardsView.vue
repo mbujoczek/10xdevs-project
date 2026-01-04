@@ -1,7 +1,7 @@
 <script setup lang="ts">
+import EmptyState from '@/components/common/EmptyState.vue'
 import CreateEditFlashcardDialog from '@/components/dialogs/CreateEditFlashcardDialog.vue'
 import DeleteConfirmDialog from '@/components/dialogs/DeleteConfirmDialog.vue'
-import EmptyState from '@/features/flashcards/components/EmptyState.vue'
 import FlashcardsList from '@/features/flashcards/components/FlashcardsList.vue'
 import { useFlashcardsStore } from '@/features/flashcards/store'
 import type { CreateFlashcardRequest } from '@/types/flashcards.types'
@@ -98,8 +98,13 @@ const navigateToGenerate = () => {
 
         <EmptyState
           v-if="!loading && !hasFlashcards"
-          @create="openCreateDialog"
-          @generate="navigateToGenerate"
+          icon="mdi-cards-outline"
+          :title="$t('flashcards.emptyState.title')"
+          :description="$t('flashcards.emptyState.description')"
+          :primary-action-label="$t('flashcards.emptyState.createButton')"
+          :secondary-action-label="$t('flashcards.emptyState.generateButton')"
+          @primary-action="openCreateDialog"
+          @secondary-action="navigateToGenerate"
         />
 
         <FlashcardsList

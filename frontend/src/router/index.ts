@@ -42,7 +42,12 @@ const router = createRouter({
         {
           path: 'learn',
           name: 'learn',
-          component: () => import('@/features/dashboard/views/DashboardView.vue'), // TODO: Replace with LearningSessionView
+          component: () => import('@/features/learning/views/LearningSessionView.vue'),
+        },
+        {
+          path: 'learn/summary',
+          name: 'learn-summary',
+          component: () => import('@/features/learning/views/LearningSummaryView.vue'),
         },
         {
           path: 'flashcards',
