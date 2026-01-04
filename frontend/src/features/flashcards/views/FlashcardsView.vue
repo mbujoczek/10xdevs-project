@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import EmptyState from '@/components/common/EmptyState.vue'
-import CreateEditFlashcardDialog from '@/components/dialogs/CreateEditFlashcardDialog.vue'
-import DeleteConfirmDialog from '@/components/dialogs/DeleteConfirmDialog.vue'
+import CreateEditFlashcardDialog from '@/features/flashcards/components/CreateEditFlashcardDialog.vue'
+import DeleteConfirmDialog from '@/features/flashcards/components/DeleteConfirmDialog.vue'
 import FlashcardsList from '@/features/flashcards/components/FlashcardsList.vue'
 import { useFlashcardsStore } from '@/features/flashcards/store'
 import type { CreateFlashcardRequest } from '@/types/flashcards.types'
