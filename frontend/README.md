@@ -30,7 +30,6 @@ src/
 ├── features/           # Main application modules (e.g., authentication)
 ├── layouts/            # Page layouts
 ├── router/             # Vue Router configuration
-├── services/           # Business logic
 ├── store/              # Pinia state management stores
 ├── styles/             # Global styles and variables
 ├── types/              # Global TypeScript type definitions
@@ -46,8 +45,8 @@ The project follows a scalable, feature-based architecture:
 - **`features/`**: Core application modules. Each feature is self-contained with its own components, views, routes, and store.
 - **`components/`**: `base/` components are for atomic, reusable UI elements, while `common/` holds more complex shared components.
 - **`composables/`**: Reusable stateful logic extracted with the Composition API.
-- **`api/` vs `services/`**: The `api/` layer handles raw HTTP communication, while `services/` implement business logic using data from the API layer.
-- **State Management**: Handled by [Pinia](https://pinia.vuejs.org/), with stores located within their respective feature modules.
+- **`api/`**: The `api/` layer handles raw HTTP communication.
+- **State Management & Business Logic**: Handled by [Pinia](https://pinia.vuejs.org/). Stores contain state and business logic, orchestrating calls to the `api` layer. They are located within their respective feature modules.
 
 ## Technology Stack
 
@@ -104,4 +103,4 @@ npm run lint
 - **Logic**: Extract reusable logic into `src/composables`.
 - **State**: Define Pinia stores in `src/features/{feature}/store.ts`.
 - **API Calls**: Add new API communication functions in `src/api`.
-- **Business Logic**: Implement business rules and data processing in `src/services`.
+- **Business Logic & State**: Implement business rules, data processing, and state management in Pinia stores (`src/features/{feature}/store.ts`).

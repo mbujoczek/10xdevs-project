@@ -15,6 +15,20 @@ builder.Services.Configure<StatisticsOptions>(
 
 // Add services to the container.
 builder.Services.AddControllers();
+
+// Configure CORS
+var allowedOrigins = builder.Configuration.GetSection("Cors:AllowedOrigins").Get<string[]>() ?? Array.Empty<string>();
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowFrontend", policy =>
+    {
+        policy.WithOrigins(allowedOrigins)
+              .AllowAnyMethod()
+              .AllowAnyHeader()
+              .AllowCredentials();
+    });
+});
+
 builder.Services.AddEndpointsApiExplorer();
 
 // Configure Swagger with JWT authentication support
@@ -113,6 +127,8 @@ if (app.Environment.IsDevelopment())
         c.SwaggerEndpoint("/swagger/v1/swagger.json", "10xdevs API v1");
     });
 }
+
+app.UseCors("AllowFrontend");
 
 app.UseHttpsRedirection();
 

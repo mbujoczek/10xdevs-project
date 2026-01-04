@@ -20,3 +20,31 @@ export interface RateFlashcardResponse {
   srsLastGrade: SRSGrade
   updatedAtUtc: string
 }
+
+export interface LearningSessionState {
+  currentIndex: number
+  totalCount: number
+  isAnswerVisible: boolean
+  completedCount: number
+}
+
+export interface SessionStatistics {
+  totalReviewed: number
+  ratingDistribution: RatingDistribution
+  sessionDurationMs?: number
+}
+
+export interface RatingDistribution {
+  [SRSGrade.CompleteBlackout]: number
+  [SRSGrade.IncorrectResponse]: number
+  [SRSGrade.IncorrectResponseRecalled]: number
+  [SRSGrade.CorrectWithDifficulty]: number
+  [SRSGrade.CorrectAfterHesitation]: number
+  [SRSGrade.PerfectResponse]: number
+}
+
+export interface FlashcardRatingPayload {
+  flashcardId: number
+  grade: SRSGrade
+  timestamp: string
+}

@@ -21,3 +21,8 @@ export interface RegisterResponse {
   token: string
   createdAtUtc: string
 }
+
+export interface User {
+  id: number
+  username: string
+}

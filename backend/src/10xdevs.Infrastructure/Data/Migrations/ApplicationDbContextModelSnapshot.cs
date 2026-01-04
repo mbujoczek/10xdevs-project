@@ -68,7 +68,7 @@ namespace _10xdevs.Infrastructure.Data.Migrations
                     b.Property<int>("Source")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasDefaultValue(1);
+                        .HasDefaultValue(0);
 
                     b.Property<int>("Status")
                         .ValueGeneratedOnAdd()
@@ -96,12 +96,16 @@ namespace _10xdevs.Infrastructure.Data.Migrations
 
                     b.ToTable("Flashcards", null, t =>
                         {
+                            t.HasTrigger("TR_Flashcards_UpdatedAtUtc");
+
                             t.HasCheckConstraint("CK_Flashcards_SRSLastGrade", "[SRSLastGrade] IS NULL OR ([SRSLastGrade] >= 0 AND [SRSLastGrade] <= 5)");
 
                             t.HasCheckConstraint("CK_Flashcards_Source", "[Source] IN (0, 1)");
 
                             t.HasCheckConstraint("CK_Flashcards_Status", "[Status] IN (0, 1, 2, 3)");
                         });
+
+                    b.HasAnnotation("SqlServer:UseSqlOutputClause", false);
                 });
 
             modelBuilder.Entity("_10xdevs.Domain.Entities.FlashcardGenerationEvent", b =>
@@ -143,7 +147,12 @@ namespace _10xdevs.Infrastructure.Data.Migrations
                     b.HasIndex("UserId")
                         .HasDatabaseName("IX_FlashcardGenerationEvents_UserId");
 
-                    b.ToTable("FlashcardGenerationEvents", (string)null);
+                    b.ToTable("FlashcardGenerationEvents", null, t =>
+                        {
+                            t.HasTrigger("TR_FlashcardGenerationEvents_UpdatedAtUtc");
+                        });
+
+                    b.HasAnnotation("SqlServer:UseSqlOutputClause", false);
                 });
 
             modelBuilder.Entity("_10xdevs.Domain.Entities.User", b =>
@@ -181,7 +190,12 @@ namespace _10xdevs.Infrastructure.Data.Migrations
                         .IsUnique()
                         .HasDatabaseName("UQ_Users_Username");
 
-                    b.ToTable("Users", (string)null);
+                    b.ToTable("Users", null, t =>
+                        {
+                            t.HasTrigger("TR_Users_UpdatedAtUtc");
+                        });
+
+                    b.HasAnnotation("SqlServer:UseSqlOutputClause", false);
                 });
 
             modelBuilder.Entity("_10xdevs.Domain.Entities.Flashcard", b =>
