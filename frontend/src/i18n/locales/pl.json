@@ -4,7 +4,7 @@
     },
     "nav": {
         "dashboard": "Panel główny",
-        "myFlashcards": "Moje Fiszki",
+        "myFlashcards": "Moje fiszki",
         "generate": "Generuj",
         "statistics": "Statystyki",
         "logout": "Wyloguj"
@@ -16,16 +16,16 @@
         "actions": {
             "startLearning": "Rozpocznij naukę",
             "generate": "Generuj fiszki",
-            "myFlashcards": "Moje Fiszki"
+            "myFlashcards": "Moje fiszki"
         }
     },
     "generate": {
-        "title": "Generuj Fiszki",
+        "title": "Generuj fiszki",
         "description": "Wklej poniżej swój materiał do nauki, notatki z wykładu lub dowolny tekst (maksymalnie 10 000 znaków). Nasza sztuczna inteligencja przeanalizuje treść i wygeneruje fiszki, które pomogą Ci w efektywnej nauce.",
         "form": {
             "inputLabel": "Materiał do nauki",
             "inputPlaceholder": "Wklej tutaj swój tekst... (minimum 50 znaków)",
-            "submitButton": "Generuj Fiszki"
+            "submitButton": "Generuj fiszki"
         },
         "errors": {
             "required": "Wprowadź tekst, aby wygenerować fiszki",
@@ -34,24 +34,24 @@
         }
     },
     "statistics": {
-        "title": "Statystyki Generowania AI",
+        "title": "Statystyki generowania AI",
         "loading": "Ładowanie statystyk...",
         "successMetric": {
             "met": "Metryka sukcesu osiągnięta! Wskaźnik akceptacji AI osiąga cel.",
             "notMet": "Metryka sukcesu jeszcze nie osiągnięta. Wskaźnik akceptacji AI jest poniżej celu."
         },
         "metrics": {
-            "totalCandidates": "Wszystkie Kandydatki",
-            "acceptedWithoutEditing": "Zaakceptowane Bez Edycji",
-            "acceptedAfterEditing": "Zaakceptowane Po Edycji",
+            "totalCandidates": "Wszystkie kandydatki",
+            "acceptedWithoutEditing": "Zaakceptowane bez edycji",
+            "acceptedAfterEditing": "Zaakceptowane po edycji",
             "rejected": "Odrzucone",
-            "acceptanceRate": "Wskaźnik Akceptacji",
-            "pureAcceptanceRate": "Czysty Wskaźnik Akceptacji",
-            "targetRate": "Docelowy Wskaźnik"
+            "acceptanceRate": "Wskaźnik akceptacji",
+            "pureAcceptanceRate": "Czysty wskaźnik akceptacji",
+            "targetRate": "Docelowy wskaźnik"
         }
     },
     "review": {
-        "title": "Przejrzyj Wygenerowane Fiszki",
+        "title": "Przejrzyj wygenerowane fiszki",
         "description": "Przejrzyj fiszki wygenerowane przez AI i zdecyduj, które zapisać. Możesz zaakceptować je bez zmian, edytować lub odrzucić.",
         "stats": {
             "pending": "Oczekujące",
@@ -71,9 +71,9 @@
             }
         },
         "noCandidates": "Brak fiszek do przejrzenia",
-        "finishButton": "Zakończ Przegląd",
+        "finishButton": "Zakończ przegląd",
         "confirmDialog": {
-            "title": "Potwierdź Akcję",
+            "title": "Potwierdź akcję",
             "acceptMessage": "Czy na pewno chcesz zaakceptować tę fiszkę?",
             "editMessage": "Czy na pewno chcesz zapisać te zmiany?",
             "rejectMessage": "Czy na pewno chcesz odrzucić tę fiszkę?",
@@ -81,7 +81,7 @@
             "confirm": "Potwierdź"
         },
         "editDialog": {
-            "title": "Edytuj Fiszkę",
+            "title": "Edytuj fiszkę",
             "questionLabel": "Pytanie",
             "answerLabel": "Odpowiedź",
             "cancel": "Anuluj",
@@ -125,16 +125,16 @@
         }
     },
     "flashcards": {
-        "title": "Moje Fiszki",
+        "title": "Moje fiszki",
         "actions": {
-            "createFlashcard": "Utwórz Fiszkę",
-            "generateFromText": "Generuj z Tekstu"
+            "createFlashcard": "Utwórz fiszkę",
+            "generateFromText": "Generuj z tekstu"
         },
         "emptyState": {
             "title": "Nie masz jeszcze fiszek",
             "description": "Zacznij od ręcznego utworzenia fiszki lub wygeneruj je z materiału do nauki.",
-            "createButton": "Utwórz Fiszkę",
-            "generateButton": "Generuj z Tekstu"
+            "createButton": "Utwórz fiszkę",
+            "generateButton": "Generuj z tekstu"
         },
         "card": {
             "question": "Pytanie",
@@ -148,13 +148,13 @@
             "deleteTooltip": "Usuń fiszkę"
         },
         "createDialog": {
-            "title": "Utwórz Fiszkę"
+            "title": "Utwórz fiszkę"
         },
         "editDialog": {
-            "title": "Edytuj Fiszkę"
+            "title": "Edytuj fiszkę"
         },
         "deleteDialog": {
-            "title": "Usuń Fiszkę",
+            "title": "Usuń fiszkę",
             "message": "Czy na pewno chcesz usunąć tę fiszkę? Tej operacji nie można cofnąć."
         },
         "form": {
@@ -169,35 +169,35 @@
         }
     },
     "learning": {
-        "title": "Sesja Nauki",
+        "title": "Sesja nauki",
         "question": "Pytanie",
         "answer": "Odpowiedź",
-        "showAnswer": "Pokaż Odpowiedź",
-        "rateYourResponse": "Oceń Swoją Odpowiedź",
+        "showAnswer": "Pokaż odpowiedź",
+        "rateYourResponse": "Oceń swoją odpowiedź",
         "grades": {
-            "completeBlackout": "Kompletna Zapaść",
+            "completeBlackout": "Kompletny zanik pamięci",
             "incorrectResponse": "Niepoprawnie",
-            "incorrectResponseRecalled": "Niepoprawnie, Łatwe",
-            "correctWithDifficulty": "Poprawnie, Trudne",
-            "correctAfterHesitation": "Poprawnie, Dobre",
+            "incorrectResponseRecalled": "Niepoprawnie, łatwe",
+            "correctWithDifficulty": "Poprawnie, trudne",
+            "correctAfterHesitation": "Poprawnie, łatwe",
             "perfectResponse": "Perfekcyjnie"
         },
         "emptyState": {
-            "title": "Wszystko Powtórzone!",
+            "title": "Wszystko powtórzone!",
             "description": "Nie masz teraz fiszek do powtórki. Świetna robota!",
-            "viewFlashcards": "Zobacz Moje Fiszki",
-            "generateFlashcards": "Generuj Nowe Fiszki"
+            "viewFlashcards": "Zobacz moje fiszki",
+            "generateFlashcards": "Generuj nowe fiszki"
         },
         "summary": {
-            "title": "Sesja Ukończona!",
+            "title": "Sesja ukończona!",
             "subtitle": "Świetna robota! Oto podsumowanie Twojej sesji.",
-            "totalReviewed": "Przejrzane Fiszki",
-            "averageRating": "Średnia Ocena",
-            "duration": "Czas Trwania",
-            "ratingDistribution": "Rozkład Ocen",
+            "totalReviewed": "Przejrzane fiszki",
+            "averageRating": "Średnia ocena",
+            "duration": "Czas trwania",
+            "ratingDistribution": "Rozkład ocen",
             "times": "razy",
-            "returnToDashboard": "Wróć do Panelu",
-            "noDataTitle": "Brak Danych Sesji",
+            "returnToDashboard": "Wróć do panelu",
+            "noDataTitle": "Brak danych sesji",
             "noDataDescription": "Brak danych sesji. Najpierw ukończ sesję nauki."
         }
     },
@@ -225,6 +225,8 @@
             "badRequest": "Nieprawidłowe żądanie. Sprawdź wprowadzone dane.",
             "validationFailed": "Walidacja nie powiodła się. Popraw błędy i spróbuj ponownie.",
             "aiServiceUnavailable": "Serwis AI jest obecnie niedostępny. Spróbuj ponownie później.",
+            "aiServiceConfigurationError": "Serwis AI nie jest poprawnie skonfigurowany. Skontaktuj się z pomocą techniczną.",
+            "aiServiceRateLimitExceeded": "Przekroczono limit zapytań do serwisu AI. Spróbuj ponownie za chwilę.",
             "serviceUnavailable": "Serwis jest tymczasowo niedostępny. Spróbuj ponownie później.",
             "internalServerError": "Wystąpił nieoczekiwany błąd serwera. Spróbuj ponownie później.",
             "networkError": "Brak połączenia z siecią. Sprawdź połączenie internetowe.",

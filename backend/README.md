@@ -35,7 +35,7 @@ The project follows Clean Architecture with the CQRS pattern:
 - MediatR 12
 - SQL Server
 - Swagger/OpenAPI
-- Ollama (Local LLM - Phi3)
+- OpenRouter API (Cloud-based LLM)
 
 ## Prerequisites
 
@@ -43,28 +43,7 @@ Before running the application, ensure you have:
 
 - [.NET 8 SDK](https://dotnet.microsoft.com/download/dotnet/8.0)
 - [SQL Server](https://www.microsoft.com/sql-server) (LocalDB or full instance)
-- [Ollama](https://ollama.ai/) installed and running locally
-
-### Ollama Setup
-
-1. **Install Ollama**:
-
-   - Download from [https://ollama.ai/](https://ollama.ai/)
-   - Follow installation instructions for your OS
-
-2. **Pull the Phi3 model**:
-
-   ```bash
-   ollama pull phi3
-   ```
-
-3. **Verify Ollama is running**:
-
-   ```sh
-   ollama list
-   ```
-
-   Ollama should be accessible at `http://localhost:11434`
+- [OpenRouter API Key](https://openrouter.ai/) - Sign up to get your API key
 
 ## Project Setup
 
@@ -101,19 +80,25 @@ Update `src/10xdevs.Api/appsettings.json` with your settings:
     "Audience": "10xdevs.Client",
     "ExpirationHours": "24"
   },
-  "Ollama": {
-    "BaseUrl": "http://localhost:11434",
-    "Model": "phi3",
-    "Timeout": "30"
+  "OpenRouter": {
+    "BaseUrl": "https://openrouter.ai/api/v1/",
+    "Referer": "http://localhost:5019"
   }
 }
 ```
 
 **Configuration Options:**
 
-- `Ollama:BaseUrl` - Ollama server address (default: http://localhost:11434)
-- `Ollama:Model` - LLM model name (default: phi3)
-- `Ollama:Timeout` - Request timeout in seconds (default: 30)
+- `OpenRouter:BaseUrl` - OpenRouter API base URL (default: https://openrouter.ai/api/v1/)
+- `OpenRouter:Referer` - Your application URL (optional but recommended)
+
+**Setting up API Key:**
+
+For development, use .NET User Secrets to securely store your API key:
+
+```sh
+dotnet user-secrets set "OpenRouter:ApiKey" "sk-or-v1-YOUR-API-KEY-HERE" --project src/10xdevs.Api
+```
 
 ### Run for Development
 
@@ -123,9 +108,9 @@ dotnet run --project src/10xdevs.Api
 
 The API will be available at:
 
-- HTTPS: `https://localhost:7001`
-- HTTP: `http://localhost:5001`
-- Swagger UI: `https://localhost:7001/swagger`
+- HTTPS: `https://localhost:5020`
+- HTTP: `http://localhost:5019`
+- Swagger UI: `http://localhost:5019/swagger` or `https://localhost:5020/swagger`
 
 ### Build for Production
 
@@ -148,14 +133,18 @@ dotnet format 10xdevs.sln
 
 ## Troubleshooting
 
-### Ollama Connection Issues
+### OpenRouter API Issues
 
 **Problem**: API returns 503 Service Unavailable when generating flashcards
 
 **Solutions**:
 
-1. Verify Ollama is running: `ollama list`
-2. Check Ollama is accessible: `curl http://localhost:11434/api/version`
-3. Ensure phi3 model is pulled: `ollama pull phi3`
-4. Check firewall settings allowing localhost:11434
-5. Review logs for detailed error messages
+1. Verify your API key is correctly configured in user secrets
+2. Check OpenRouter API status at [https://openrouter.ai/status](https://openrouter.ai/status)
+3. Ensure you have sufficient credits in your OpenRouter account
+4. Review application logs for detailed error messages
+5. Verify network connectivity and firewall settings
+
+**Problem**: 401 Unauthorized error
+
+**Solution**: Your API key is invalid or expired. Generate a new one at [https://openrouter.ai/keys](https://openrouter.ai/keys)

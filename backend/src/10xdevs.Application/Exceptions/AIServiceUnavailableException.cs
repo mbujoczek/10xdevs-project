@@ -1,7 +1,7 @@
 namespace _10xdevs.Application.Exceptions;
 
 /// <summary>
-/// Exception thrown when the AI service (Ollama) is unavailable or returns an error.
+/// Exception thrown when the AI service is unavailable or returns an error.
 /// Results in HTTP 503 Service Unavailable response.
 /// </summary>
 public class AIServiceUnavailableException : Exception

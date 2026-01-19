@@ -23,13 +23,14 @@
 
 ## Sztuczna Inteligencja (AI)
 
-- **Rozwiązanie:** Ollama do hostowania modeli open-source (LLM).
+- **Rozwiązanie:** OpenRouter - API chmurowe do dostępu do różnych modeli LLM.
 - **Uzasadnienie:**
-  - Bezpłatne (poza infrastrukturą).
-  - Prywatność danych.
-  - Pełna kontrola nad modelem.
-- **Sposób działania:** Lokalne API do wysyłania zapytań (promptów) z żądaniem odpowiedzi w formacie JSON.
-- **Przykładowe modele:** Llama 3, Mistral, Phi-3.
+  - Dostęp do wielu najnowszych modeli.
+  - Brak wymagań infrastruktury lokalnej.
+  - Model płatności za użycie.
+  - Niezawodna dostępność i wydajność.
+- **Sposób działania:** REST API do wysyłania zapytań (promptów) ze strukturalnym formatem odpowiedzi JSON przy użyciu JSON Schema.
+- **Domyślny model:** Mistral 7B Instruct (opłacalny i niezawodny w podążaniu za instrukcjami).
 
 ## Testowanie
 

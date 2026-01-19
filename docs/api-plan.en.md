@@ -965,7 +965,7 @@ Uses SuperMemo SM-2 algorithm via open-source library (e.g., `SuperMemoAssistant
 
 **Endpoints:**
 
-- Development: `http://localhost:5000/swagger`
+- Development: `http://localhost:5019/swagger`
 - Production: `/swagger` (optionally disabled in production)
 
 **Features:**

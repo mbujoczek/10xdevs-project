@@ -23,13 +23,14 @@
 
 ## Artificial Intelligence (AI)
 
-- **Solution:** Ollama for hosting open-source models (LLM).
+- **Solution:** OpenRouter - Cloud-based API for accessing various LLM models.
 - **Justification:**
-  - Free (excluding infrastructure costs).
-  - Data privacy.
-  - Full control over the model.
-- **Method:** Local API for sending prompts with a request for a JSON-formatted response.
-- **Example Models:** Llama 3, Mistral, Phi-3.
+  - Access to multiple state-of-the-art models.
+  - No local infrastructure required.
+  - Pay-per-use pricing model.
+  - Reliable availability and performance.
+- **Method:** REST API for sending prompts with structured JSON response format using JSON Schema.
+- **Default Model:** Mistral 7B Instruct (cost-effective and reliable for instruction following).
 
 ## Testing
 
