@@ -22,15 +22,14 @@ public static class ServiceCollectionExtensions
         services.AddSingleton<IJwtTokenService, JwtTokenService>();
         services.AddScoped<ISpacedRepetitionService, SpacedRepetitionService>();
 
-        // Register AI service with HttpClient
-        services.AddHttpClient<IFlashcardAIService, FlashcardAIService>((serviceProvider, client) =>
+        // Register AI service with HttpClient for OpenRouter
+        services.AddHttpClient<IFlashcardAIService, OpenRouterService>((serviceProvider, client) =>
         {
             var configuration = serviceProvider.GetRequiredService<IConfiguration>();
-            var baseUrl = configuration["Ollama:BaseUrl"] ?? "http://localhost:11434";
-            var timeout = int.Parse(configuration["Ollama:Timeout"] ?? "240");
-
+            var baseUrl = configuration["OpenRouter:BaseUrl"]
+                ?? throw new InvalidOperationException("OpenRouter:BaseUrl is not configured in appsettings.json");
             client.BaseAddress = new Uri(baseUrl);
-            client.Timeout = TimeSpan.FromSeconds(timeout);
+            client.Timeout = TimeSpan.FromSeconds(120);
         })
         .SetHandlerLifetime(TimeSpan.FromMinutes(5)); // Connection pooling optimization
 

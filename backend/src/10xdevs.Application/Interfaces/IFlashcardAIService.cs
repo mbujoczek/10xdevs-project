@@ -4,7 +4,7 @@ using _10xdevs.Application.Exceptions;
 namespace _10xdevs.Application.Interfaces;
 
 /// <summary>
-/// Service interface for AI-powered flashcard generation using Ollama.
+/// Service interface for AI-powered flashcard generation.
 /// </summary>
 public interface IFlashcardAIService
 {
@@ -16,7 +16,7 @@ public interface IFlashcardAIService
     /// <param name="language">The language for generated flashcards ('pl' or 'en')</param>
     /// <param name="cancellationToken">Cancellation token for async operation</param>
     /// <returns>List of flashcard candidates with questions and answers</returns>
-    /// <exception cref="AIServiceUnavailableException">Thrown when Ollama service is unavailable or returns an error</exception>
+    /// <exception cref="AIServiceUnavailableException">Thrown when AI service is unavailable or returns an error</exception>
     Task<List<FlashcardCandidateDto>> GenerateFlashcardsAsync(
         string inputText,
         string language,

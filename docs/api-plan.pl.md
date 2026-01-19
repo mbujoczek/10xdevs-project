@@ -968,7 +968,7 @@ Używa algorytmu SuperMemo SM-2 poprzez bibliotekę open-source (np. `SuperMemoA
 
 **Punkty końcowe:**
 
-- Rozwój: `http://localhost:5000/swagger`
+- Rozwój: `http://localhost:5019/swagger`
 - Produkcja: `/swagger` (opcjonalnie wyłączone w produkcji)
 
 **Funkcje:**
