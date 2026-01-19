@@ -1,5 +1,7 @@
 import { useNotifications } from '@/composables/useNotifications'
+import { useAuthStore } from '@/features/authentication/store'
 import i18n from '@/i18n'
+import router from '@/router'
 import { useUiStore } from '@/store/ui.store'
 import { extractValidationErrors, mapErrorToI18nKey } from '@/utils/errorMapping'
 import axios, { type AxiosError } from 'axios'
@@ -37,6 +39,8 @@ api.interceptors.response.use(
     return response
   },
   (error: AxiosError) => {
+    const authStore = useAuthStore()
+
     const uiStore = useUiStore()
     uiStore.stopLoading()
 
@@ -60,6 +64,11 @@ api.interceptors.response.use(
       }
     } else {
       showError(message)
+    }
+
+    if (error.response?.status === 401) {
+      authStore.logout()
+      router.push('/login')
     }
 
     return Promise.reject(error)

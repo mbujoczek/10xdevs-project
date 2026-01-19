@@ -13,5 +13,3 @@ const { isLoading } = storeToRefs(uiStore)
 
   <router-view />
 </template>
-
-<style scoped></style>
