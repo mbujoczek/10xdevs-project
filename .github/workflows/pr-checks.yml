@@ -1,0 +1,28 @@
+name: Pull Request Checks
+
+on:
+  pull_request:
+    branches:
+      - develop
+      - main
+
+jobs:
+  backend-checks:
+    name: Backend Build & Test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Run backend build and test
+        uses: ./.github/actions/backend-build-test
+
+  frontend-checks:
+    name: Frontend Build & Test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Run frontend build and test
+        uses: ./.github/actions/frontend-build-test

@@ -6,8 +6,9 @@
       "args": ["-y", "@upstash/context7-mcp@latest"]
     },
     "10x-mvp-tracker": {
+      "type": "stdio",
       "command": "npx",
-      "args": ["@przeprogramowani/10x-mvp-tracker"]
+      "args": ["-y", "@przeprogramowani/10x-mvp-tracker@latest"]
     }
   }
 }

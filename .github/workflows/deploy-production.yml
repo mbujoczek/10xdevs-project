@@ -1,0 +1,164 @@
+name: Deploy to Production
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  deploy:
+    name: Deploy to Production
+    runs-on: ubuntu-latest
+    environment: production
+    permissions:
+      contents: read # Read repository content
+      packages: write # Push to GitHub Container Registry
+      id-token: write # OIDC token for additional security
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.release.tag_name }}
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+
+      - name: Setup Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Log in to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build and push backend image
+        uses: docker/build-push-action@v6
+        with:
+          context: ./backend
+          file: ./backend/Dockerfile
+          push: true
+          tags: |
+            ghcr.io/${{ github.repository }}/backend:${{ github.event.release.tag_name }}
+            ghcr.io/${{ github.repository }}/backend:latest
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+      - name: Build and push frontend image
+        uses: docker/build-push-action@v6
+        with:
+          context: ./frontend
+          file: ./frontend/Dockerfile
+          push: true
+          tags: |
+            ghcr.io/${{ github.repository }}/frontend:${{ github.event.release.tag_name }}
+            ghcr.io/${{ github.repository }}/frontend:latest
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+      - name: Validate required secrets
+        run: |
+          if [ -z "${{ secrets.DB_SA_PASSWORD }}" ]; then
+            echo "Error: DB_SA_PASSWORD secret is not set"
+            exit 1
+          fi
+          if [ -z "${{ secrets.OPENROUTER_API_KEY }}" ]; then
+            echo "Error: OPENROUTER_API_KEY secret is not set"
+            exit 1
+          fi
+          if [ -z "${{ secrets.JWT_SECRET_KEY }}" ]; then
+            echo "Error: JWT_SECRET_KEY secret is not set"
+            exit 1
+          fi
+          echo "All required secrets are configured"
+
+      - name: Deploy to production server
+        env:
+          # Base64 encode secrets to safely handle special characters
+          DB_SA_PASSWORD_B64: ${{ secrets.DB_SA_PASSWORD }}
+          OPENROUTER_API_KEY_B64: ${{ secrets.OPENROUTER_API_KEY }}
+          JWT_SECRET_KEY_B64: ${{ secrets.JWT_SECRET_KEY }}
+        run: |
+          echo "=== VPS Deployment Placeholder ==="
+          echo "Images built and pushed to GHCR:"
+          echo "  - ghcr.io/${{ github.repository }}/backend:${{ github.event.release.tag_name }}"
+          echo "  - ghcr.io/${{ github.repository }}/frontend:${{ github.event.release.tag_name }}"
+          echo ""
+          echo "To deploy to VPS, configure SSH access and uncomment the steps below:"
+          echo ""
+          echo "Required GitHub Secrets (already configured):"
+          echo "  - DB_SA_PASSWORD"
+          echo "  - OPENROUTER_API_KEY"
+          echo "  - JWT_SECRET_KEY"
+          echo ""
+          echo "Additional GitHub Secrets needed for VPS deployment:"
+          echo "  - VPS_HOST (server IP or domain)"
+          echo "  - VPS_USER (SSH username)"
+          echo "  - VPS_SSH_KEY (private SSH key)"
+          echo "  - VPS_DEPLOY_PATH (deployment directory, e.g., /opt/10xdevs)"
+          echo ""
+          echo "Deployment steps to implement:"
+          echo "  1. Setup SSH key and known_hosts"
+          echo "  2. SSH to VPS and login to GHCR"
+          echo "  3. Create/update .env file on VPS with secrets"
+          echo "  4. Pull latest docker-compose.yml and images"
+          echo "  5. Run docker compose up -d"
+          echo ""
+          echo "Example implementation:"
+          echo "  - Install SSH key from secrets"
+          echo "  - ssh user@vps 'docker login ghcr.io'"
+          echo "  - scp docker-compose.yml to VPS"
+          echo "  - ssh user@vps 'cd /app && echo \"DB_SA_PASSWORD=\$DB_SA_PASSWORD\" > .env'"
+          echo "  - ssh user@vps 'cd /app && docker compose pull && docker compose up -d'"
+
+          # Uncomment and configure the following steps for actual VPS deployment:
+
+          # - name: Setup SSH key
+          #   run: |
+          #     mkdir -p ~/.ssh
+          #     echo "${{ secrets.VPS_SSH_KEY }}" > ~/.ssh/deploy_key
+          #     chmod 600 ~/.ssh/deploy_key
+          #     ssh-keyscan -H ${{ secrets.VPS_HOST }} >> ~/.ssh/known_hosts
+
+          # - name: Deploy to VPS via SSH
+          #   run: |
+          #     ssh -i ~/.ssh/deploy_key ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }} << 'ENDSSH'
+          #       set -e -o pipefail
+          #       set +x  # Disable command echoing for security
+          #       
+          #       cd ${{ secrets.VPS_DEPLOY_PATH }}
+          #       
+          #       # Login to GHCR
+          #       echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+          #       
+          #       # Safely create .env file (secrets are masked by GitHub Actions)
+          #       # Using printf to avoid issues with special characters
+          #       {
+          #         printf "DB_SA_PASSWORD=%s\n" "$DB_SA_PASSWORD_B64"
+          #         printf "OPENROUTER_API_KEY=%s\n" "$OPENROUTER_API_KEY_B64"
+          #         printf "JWT_SECRET_KEY=%s\n" "$JWT_SECRET_KEY_B64"
+          #       } > .env
+          #       
+          #       # Set restrictive permissions on .env
+          #       chmod 600 .env
+          #       
+          #       # Pull latest images and restart services
+          #       docker compose pull
+          #       docker compose up -d --remove-orphans
+          #       
+          #       # Verify services are running
+          #       docker compose ps
+          #       
+          #       # Cleanup old images
+          #       docker image prune -f
+          #     ENDSSH
+          #
+          # Alternative: Use encrypted secrets management
+          # For better security in production, consider:
+          #   - HashiCorp Vault integration
+          #   - Docker Secrets (Swarm mode)
+          #   - Cloud provider secret managers (AWS Secrets Manager, GCP Secret Manager)
+          #   - Sealed Secrets (Kubernetes)
