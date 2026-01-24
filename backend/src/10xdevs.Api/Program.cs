@@ -114,6 +114,13 @@ builder.Services.AddAuthorization();
 
 var app = builder.Build();
 
+// Apply pending database migrations automatically
+using (var scope = app.Services.CreateScope())
+{
+    var db = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+    db.Database.Migrate();
+}
+
 // Configure the HTTP request pipeline.
 
 // Global exception handling middleware (must be first)

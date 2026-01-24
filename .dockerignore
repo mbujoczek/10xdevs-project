@@ -1,0 +1,58 @@
+# Git
+.git
+.gitignore
+.gitattributes
+
+# CI/CD
+.github
+
+# Documentation
+*.md
+docs/
+
+# IDE
+.vscode/
+.idea/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Build artifacts - Backend
+**/bin/
+**/obj/
+**/out/
+**/*.dll
+**/*.pdb
+
+# Build artifacts - Frontend
+**/node_modules/
+**/dist/
+**/.vite/
+**/coverage/
+
+# Tests
+**/tests/
+**/*.Tests/
+**/cypress/
+**/__tests__/
+
+# Environment and secrets
+.env
+.env.local
+.env.*.local
+**/.env
+
+# Logs
+**/*.log
+**/logs/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Misc
+*.swp
+*.bak
+*.tmp
+*.temp
