@@ -1,3 +1,5 @@
+import en from '@/i18n/locales/en.json'
+import pl from '@/i18n/locales/pl.json'
 import { mount } from '@vue/test-utils'
 import { createPinia, setActivePinia } from 'pinia'
 import { beforeEach, describe, expect, it } from 'vitest'
@@ -10,19 +12,10 @@ import LoginForm from '../LoginForm.vue'
 const i18n = createI18n({
   legacy: false,
   locale: 'en',
+  fallbackLocale: 'en',
   messages: {
-    en: {
-      auth: {
-        login: {
-          username: 'Username',
-          password: 'Password',
-          submit: 'Log In',
-        },
-      },
-      validation: {
-        required: 'This field is required',
-      },
-    },
+    en,
+    pl,
   },
 })
 

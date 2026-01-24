@@ -1,3 +1,5 @@
+import en from '@/i18n/locales/en.json'
+import pl from '@/i18n/locales/pl.json'
 import { mount } from '@vue/test-utils'
 import { createPinia, setActivePinia } from 'pinia'
 import { beforeEach, describe, expect, it } from 'vitest'
@@ -10,22 +12,10 @@ import RegisterForm from '../RegisterForm.vue'
 const i18n = createI18n({
   legacy: false,
   locale: 'en',
+  fallbackLocale: 'en',
   messages: {
-    en: {
-      auth: {
-        register: {
-          username: 'Username',
-          password: 'Password',
-          submit: 'Sign up',
-        },
-      },
-      validation: {
-        required: 'This field is required',
-        usernameMaxLength: 'Username must not exceed 50 characters',
-        noWhitespace: 'Username cannot contain spaces',
-        passwordMinLength: 'Password must be at least 8 characters long',
-      },
-    },
+    en,
+    pl,
   },
 })
 
