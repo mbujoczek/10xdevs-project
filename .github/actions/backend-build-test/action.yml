@@ -1,0 +1,22 @@
+name: Backend Build and Test
+description: Reusable composite action for building and testing .NET backend
+
+runs:
+  using: composite
+  steps:
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: '8.0.x'
+
+    - name: Restore dependencies
+      shell: pwsh
+      run: dotnet restore backend/10xdevs.sln
+
+    - name: Build solution
+      shell: pwsh
+      run: dotnet build backend/10xdevs.sln --configuration Release --no-restore
+
+    - name: Run unit tests
+      shell: pwsh
+      run: dotnet test backend/10xdevs.sln --configuration Release --no-build --verbosity normal

@@ -1,0 +1,85 @@
+version: '3.9'
+
+services:
+  db:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: 10xdevs-db
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=${DB_SA_PASSWORD}
+      - MSSQL_PID=Developer
+    ports:
+      - '1433:1433'
+    volumes:
+      - db-data:/var/opt/mssql
+    healthcheck:
+      test: /opt/mssql-tools18/bin/sqlcmd -S localhost -U sa -P "${DB_SA_PASSWORD}" -C -Q "SELECT 1" || exit 1
+      interval: 10s
+      timeout: 3s
+      retries: 10
+      start_period: 10s
+    networks:
+      - app-network
+    restart: unless-stopped
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: 10xdevs-backend
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+      - ConnectionStrings__DefaultConnection=Server=db;Database=10xdevsProject;User Id=sa;Password=${DB_SA_PASSWORD};TrustServerCertificate=True;MultipleActiveResultSets=True
+      - Jwt__SecretKey=${JWT_SECRET_KEY}
+      - Jwt__Issuer=10xdevs.Api
+      - Jwt__Audience=10xdevs.Client
+      - Jwt__ExpirationHours=24
+      - OpenRouter__ApiKey=${OPENROUTER_API_KEY}
+      - OpenRouter__BaseUrl=https://openrouter.ai/api/v1/
+      - OpenRouter__Referer=http://localhost:5173
+      - Statistics__GenerationAcceptanceTargetRate=0.75
+      - Cors__AllowedOrigins__0=http://localhost:5173
+      - Logging__LogLevel__Default=Information
+      - Logging__LogLevel__Microsoft.AspNetCore=Warning
+    ports:
+      - '5019:8080'
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      - app-network
+    restart: unless-stopped
+    healthcheck:
+      test: wget --no-verbose --tries=1 --spider http://localhost:8080/health || exit 1
+      interval: 30s
+      timeout: 3s
+      retries: 3
+      start_period: 40s
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: 10xdevs-frontend
+    ports:
+      - '5173:8081'
+    depends_on:
+      - backend
+    networks:
+      - app-network
+    restart: unless-stopped
+    healthcheck:
+      test: wget --no-verbose --tries=1 --spider http://localhost:8081/ || exit 1
+      interval: 30s
+      timeout: 3s
+      retries: 3
+      start_period: 5s
+
+volumes:
+  db-data:
+    name: 10xdevs-db-data
+
+networks:
+  app-network:
+    name: 10xdevs-network
+    driver: bridge

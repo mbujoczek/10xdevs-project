@@ -38,3 +38,9 @@
 
 - **Unit and Component Tests:** Vitest
 - **End-to-End (E2E) Tests:** Cypress
+
+### Backend
+
+- **Unit Tests:** xUnit
+- **Assertion Library:** FluentAssertions
+- **Mocking Library:** NSubstitute
