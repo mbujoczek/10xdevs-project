@@ -43,7 +43,7 @@
   - Template names: `<PascalCase>` (e.g., `<UserProfile>`).
   - View-only components (without logic): `The<Name>.vue` (e.g., `TheHeader.vue`).
   - Base components (reusable): `Base<Name>.vue` (e.g., `BaseButton.vue`).
-- **Composables**: `camelCase` with `use` prefix (e.g., `useAuth.ts`).
+- **Composables**: `camelCase` with `use` prefix (e.g., `useNotifications.ts`).
 - **Store (Pinia)**: `camelCase` with `store` suffix (e.g., `auth.store.ts`, and inside `defineStore('authStore', ...)`).
 - **Views (route components)**: `PascalCase` with `View.vue` suffix (e.g., `HomeView.vue`).
 - **Routes (Vue Router)**: `camelCase` (e.g., `userProfile`).
@@ -87,7 +87,6 @@ src/
 - **`composables/`**: Reusable, stateful logic extracted using the Composition API. Each file (e.g., `useAuth.ts`) exports a composable function that can be used in multiple components to share logic (e.g., authentication state management, mouse event handling).
 
 - **`features/`**: Heart of the architecture. Each subdirectory is a separate business module of the application (e.g., `authentication`, `orders`). Groups all related files in one place, making project management and scaling easier.
-
   - **`components/`**: Components used **only** within the given feature. Example: `LoginForm.vue` in the `authentication` module won't be used elsewhere.
   - **`views/`**: Page components that are directly mapped to routes in the router. Example: `LoginView.vue` is rendered when the user navigates to the `/login` route.
 
@@ -304,7 +303,6 @@ solution-root/
 - **`10xdevs.Api/`**: Presentation layer containing API controllers, middleware, filters, and application configuration. Handles HTTP requests/responses and delegates business logic to the Application layer.
 
 - **`10xdevs.Application/`**: Application logic layer implementing CQRS pattern with MediatR. Contains commands (write operations) and queries (read operations) with their handlers. Defines DTOs for data transfer and application-level interfaces.
-
   - **`Commands/`**: Write operations organized by feature. Each command has its handler in a dedicated folder.
   - **`Queries/`**: Read operations organized by feature. Each query has its handler in a dedicated folder.
   - **`Behaviors/`**: MediatR pipeline behaviors for cross-cutting concerns (logging, transactions).
@@ -312,7 +310,6 @@ solution-root/
 - **`10xdevs.Domain/`**: Core domain layer containing business entities, value objects, domain logic, and domain events. Independent of external concerns and frameworks.
 
 - **`10xdevs.Infrastructure/`**: Infrastructure layer implementing interfaces defined in Application and Domain layers. Contains database context, repository implementations, external service integrations, and EF Core configurations.
-
   - **`Data/Configurations/`**: Fluent API configurations for entity mappings.
   - **`Repositories/`**: Concrete implementations of repository interfaces.
 
@@ -403,3 +400,15 @@ solution-root/
 - Use multi-stage builds to create smaller production images
 - Implement layer caching strategies to speed up builds for {{dependency_types}}
 - Use non-root users in containers for better security
+- Use specific version tags for base images (e.g., `node:22-alpine`) instead of `latest`
+- Choose `slim` or `alpine` variants for production images to reduce size
+- Use `.dockerignore` to exclude unnecessary files from the build context
+- Order Dockerfile instructions from least to most frequently changing to optimize layer caching
+- Clean up package manager caches within the same `RUN` layer to reduce image size
+- Implement `HEALTHCHECK` instructions to monitor container health
+- Run containers with a read-only filesystem where possible for enhanced security
+- Set appropriate resource limits for containers in production
+- Use `COPY` instead of `ADD` for clarity and predictability
+- Scan container images for vulnerabilities before deployment
+- For Docker Compose, use version '3' or higher and define networks explicitly
+- Configure application to listen on `0.0.0.0` to be accessible from outside the container
