@@ -16,6 +16,10 @@ backend/
 │   ├── 10xdevs.Application/     # Application Layer (CQRS with MediatR)
 │   ├── 10xdevs.Domain/          # Domain Layer (Entities, Value Objects)
 │   └── 10xdevs.Infrastructure/  # Infrastructure Layer (Data Access, External Services)
+├── tests/
+│   ├── 10xdevs.Domain.Tests/
+│   ├── 10xdevs.Application.Tests/
+│   └── 10xdevs.Infrastructure.Tests/
 └── 10xdevs.sln                  # Solution file
 ```
 
@@ -130,6 +134,82 @@ dotnet format 10xdevs.sln
 - Queries go in `Application/Queries/`
 - Entity configurations go in `Infrastructure/Data/Configurations/`
 - Domain entities go in `Domain/Entities/`
+
+## Unit Testing
+
+The project includes comprehensive unit tests for all layers following best practices.
+
+### Test Projects Structure
+
+- **10xdevs.Domain.Tests**: Tests for domain entities, value objects, and business rules
+- **10xdevs.Application.Tests**: Tests for CQRS command and query handlers
+- **10xdevs.Infrastructure.Tests**: Tests for repository implementations and external services
+
+### Testing Stack
+
+- **Test Framework**: xUnit
+- **Assertion Library**: FluentAssertions (for readable assertions)
+- **Mocking Library**: NSubstitute (for creating test doubles)
+
+### Running Tests
+
+**Run all tests:**
+
+```sh
+dotnet test
+```
+
+**Run tests for specific project:**
+
+```sh
+dotnet test tests/10xdevs.Domain.Tests
+dotnet test tests/10xdevs.Application.Tests
+dotnet test tests/10xdevs.Infrastructure.Tests
+```
+
+**Run with coverage:**
+
+```sh
+dotnet test --collect:"XPlat Code Coverage"
+```
+
+**Run in watch mode (during development):**
+
+```sh
+dotnet watch test --project tests/10xdevs.Domain.Tests
+```
+
+### Test Naming Conventions
+
+- **Test Classes**: `{ClassName}Tests` (e.g., `UserTests`, `CreateUserCommandHandlerTests`)
+- **Test Methods**: `{MethodName}_Should{ExpectedBehavior}_When{Condition}`
+- **Pattern**: Arrange-Act-Assert (AAA)
+
+### Example Test
+
+```csharp
+using FluentAssertions;
+using NSubstitute;
+
+public class CreateUserCommandHandlerTests
+{
+    [Fact]
+    public async Task Handle_ShouldCreateUser_WhenValidCommandProvided()
+    {
+        // Arrange
+        var repository = Substitute.For<IUserRepository>();
+        var handler = new CreateUserCommandHandler(repository);
+        var command = new CreateUserCommand("user@example.com", "username");
+
+        // Act
+        var result = await handler.Handle(command, CancellationToken.None);
+
+        // Assert
+        result.IsSuccess.Should().BeTrue();
+        await repository.Received(1).AddAsync(Arg.Any<User>(), Arg.Any<CancellationToken>());
+    }
+}
+```
 
 ## Troubleshooting
 

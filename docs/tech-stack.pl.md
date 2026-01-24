@@ -38,3 +38,9 @@
 
 - **Testy jednostkowe i komponentowe:** Vitest
 - **Testy End-to-End (E2E):** Cypress
+
+### Backend
+
+- **Testy jednostkowe:** xUnit
+- **Biblioteka asercji:** FluentAssertions
+- **Biblioteka mockująca:** NSubstitute

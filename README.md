@@ -41,14 +41,14 @@ For detailed information about each part, please refer to their respective `READ
 
 The project leverages a modern technology stack for both frontend and backend development.
 
-| Category     | Technology                                                            |
-| ------------ | --------------------------------------------------------------------- |
-| **Frontend** | Vue 3 (Composition API), TypeScript, Vite, Pinia, Vue Router, Vuetify |
-| **Backend**  | .NET 8, Entity Framework 8, MediatR (CQRS), Swagger (OpenAPI)         |
-| **Database** | SQL Server                                                            |
-| **AI**       | OpenRouter (cloud-based API for LLM models)                           |
-| **Testing**  | Vitest (Unit), Cypress (E2E)                                          |
-| **Tooling**  | ESLint, Prettier, Docker                                              |
+| Category     | Technology                                                                |
+| ------------ | ------------------------------------------------------------------------- |
+| **Frontend** | Vue 3 (Composition API), TypeScript, Vite, Pinia, Vue Router, Vuetify     |
+| **Backend**  | .NET 8, Entity Framework 8, MediatR (CQRS), Swagger (OpenAPI)             |
+| **Database** | SQL Server                                                                |
+| **AI**       | OpenRouter (cloud-based API for LLM models)                               |
+| **Testing**  | Frontend: Vitest, Cypress · Backend: xUnit, FluentAssertions, NSubstitute |
+| **Tooling**  | ESLint, Prettier, Docker                                                  |
 
 ## Getting Started Locally
 
