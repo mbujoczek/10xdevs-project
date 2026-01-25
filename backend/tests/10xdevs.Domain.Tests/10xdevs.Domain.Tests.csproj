@@ -25,4 +25,8 @@
     <ProjectReference Include="..\..\src\10xdevs.Domain\10xdevs.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Entities\" />
+  </ItemGroup>
+
 </Project>
