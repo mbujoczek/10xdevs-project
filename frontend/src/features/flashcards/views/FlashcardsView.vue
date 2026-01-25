@@ -74,7 +74,10 @@ const navigateToGenerate = () => {
 <template>
   <v-container max-width="70em">
     <v-card>
-      <v-card-title class="d-flex justify-space-between align-center flex-wrap ga-4 pa-6">
+      <v-card-title
+        role="heading"
+        class="d-flex justify-space-between align-center flex-wrap ga-4 pa-6"
+      >
         <div class="text-h4">{{ $t('flashcards.title') }}</div>
         <div class="d-flex ga-2 flex-wrap">
           <v-btn color="primary" @click="openCreateDialog">

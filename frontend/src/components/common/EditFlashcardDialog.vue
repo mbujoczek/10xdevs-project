@@ -36,31 +36,33 @@ const question = ref('')
 const answer = ref('')
 
 watch(
-  () => props.data,
-  (newData) => {
-    if (newData) {
-      question.value = newData.question
-      answer.value = newData.answer
+  () => props.modelValue,
+  (newValue: boolean) => {
+    if (newValue) {
+      question.value = props.data?.question || ''
+      answer.value = props.data?.answer || ''
     }
   },
-  { immediate: true },
 )
 
 const questionRules = [
-  (v: string) => !!v.trim() || props.questionRequiredMessage,
-  (v: string) => v.length <= props.questionMaxLength || props.questionMaxLengthMessage,
+  (v: string) => !!v?.trim() || props.questionRequiredMessage,
+  (v: string) => v?.length <= props.questionMaxLength || props.questionMaxLengthMessage,
 ]
 
 const answerRules = [
-  (v: string) => !!v.trim() || props.answerRequiredMessage,
-  (v: string) => v.length <= props.answerMaxLength || props.answerMaxLengthMessage,
+  (v: string) => !!v?.trim() || props.answerRequiredMessage,
+  (v: string) => v?.length <= props.answerMaxLength || props.answerMaxLengthMessage,
 ]
 
 const isValid = computed(() => {
+  if (!question.value) return false
+
   const questionValid =
-    question.value?.trim().length > 0 && question.value?.length <= props.questionMaxLength
+    question.value.trim().length > 0 && question.value?.length <= props.questionMaxLength
   const answerValid =
-    answer.value?.trim().length > 0 && answer.value?.length <= props.answerMaxLength
+    answer.value.trim().length > 0 && answer.value?.length <= props.answerMaxLength
+
   return questionValid && answerValid
 })
 
@@ -90,7 +92,7 @@ const resetForm = () => {
     @update:model-value="emit('update:modelValue', $event)"
   >
     <v-card>
-      <v-card-title class="text-h6">
+      <v-card-title role="heading" class="text-h6">
         {{ title }}
       </v-card-title>
 

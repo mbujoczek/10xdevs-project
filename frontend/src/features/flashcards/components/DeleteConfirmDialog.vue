@@ -20,7 +20,7 @@ defineEmits<{
     @update:model-value="$emit('update:modelValue', $event)"
   >
     <v-card>
-      <v-card-title class="text-h6">
+      <v-card-title role="heading" class="text-h6">
         {{ $t('flashcards.deleteDialog.title') }}
       </v-card-title>
 

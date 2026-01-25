@@ -24,7 +24,7 @@ const returnToDashboard = () => {
 <template>
   <v-container max-width="70em">
     <v-card v-if="sessionStatistics">
-      <v-card-title class="text-center pa-8">
+      <v-card-title role="heading" class="text-center pa-8">
         <div class="text-h3 mb-2 text-wrap">{{ $t('learning.summary.title') }}</div>
         <div class="text-h6 text-grey text-wrap">{{ $t('learning.summary.subtitle') }}</div>
       </v-card-title>

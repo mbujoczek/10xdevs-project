@@ -10,7 +10,7 @@
     "dev": "vite",
     "build": "run-p type-check \"build-only {@}\" --",
     "preview": "vite preview",
-    "test:unit": "vitest",
+    "test:unit": "vitest run",
     "prepare": "cypress install",
     "test:e2e": "start-server-and-test preview http://localhost:4173 'cypress run --e2e'",
     "test:e2e:dev": "start-server-and-test 'vite dev --port 4173' http://localhost:4173 'cypress open --e2e'",
@@ -30,6 +30,7 @@
     "vuetify": "^3.11.6"
   },
   "devDependencies": {
+    "@testing-library/cypress": "^10.1.0",
     "@tsconfig/node24": "^24.0.3",
     "@types/jsdom": "^27.0.0",
     "@types/node": "^24.10.4",
@@ -39,7 +40,8 @@
     "@vue/eslint-config-typescript": "^14.6.0",
     "@vue/test-utils": "^2.4.6",
     "@vue/tsconfig": "^0.8.1",
-    "cypress": "^15.8.1",
+    "cypress": "^15.9.0",
+    "dotenv": "^17.2.3",
     "eslint": "^9.39.2",
     "eslint-plugin-cypress": "^5.2.0",
     "eslint-plugin-vue": "~10.6.2",

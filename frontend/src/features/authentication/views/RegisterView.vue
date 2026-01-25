@@ -18,7 +18,7 @@ const handleRegister = async (data: RegisterRequest) => {
 <template>
   <v-container class="d-flex align-center justify-center fill-height" fluid>
     <v-card width="400" class="pa-6">
-      <v-card-title class="text-h5 text-center mb-6">
+      <v-card-title role="heading" class="text-h5 text-center mb-6">
         {{ t('auth.register.title') }}
       </v-card-title>
 

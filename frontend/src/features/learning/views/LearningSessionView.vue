@@ -78,7 +78,7 @@ const navigateToGenerate = () => {
 
     <!-- Learning Interface -->
     <v-card v-else>
-      <v-card-title class="d-flex justify-space-between align-center pa-6">
+      <v-card-title role="heading" class="d-flex justify-space-between align-center pa-6">
         <div class="text-h4">{{ $t('learning.title') }}</div>
         <v-chip color="primary" variant="elevated" size="large">
           {{ sessionStatistics?.totalReviewed || 0 }} / {{ initialSessionCount }}

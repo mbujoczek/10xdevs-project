@@ -84,7 +84,7 @@ const getRatingPercentage = (grade: SRSGrade): number => {
     <v-row>
       <v-col cols="12">
         <v-card elevation="1" color="cardBackground">
-          <v-card-title class="pa-4">
+          <v-card-title role="heading" class="pa-4">
             {{ $t('learning.summary.ratingDistribution') }}
           </v-card-title>
           <v-card-text class="pa-4">
