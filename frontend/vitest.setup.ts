@@ -20,6 +20,22 @@ global.IntersectionObserver = class IntersectionObserver {
   disconnect() {}
 }
 
+// Mock visualViewport for Vuetify VDialog
+Object.defineProperty(global, 'visualViewport', {
+  writable: true,
+  value: {
+    width: 1024,
+    height: 768,
+    offsetLeft: 0,
+    offsetTop: 0,
+    pageLeft: 0,
+    pageTop: 0,
+    scale: 1,
+    addEventListener: vi.fn(),
+    removeEventListener: vi.fn(),
+  },
+})
+
 // Stub Vuetify components globally
 config.global.stubs = {
   VApp: false,

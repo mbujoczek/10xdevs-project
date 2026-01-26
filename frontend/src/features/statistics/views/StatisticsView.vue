@@ -17,7 +17,7 @@ onMounted(async () => {
     <v-row>
       <v-col cols="12">
         <v-card class="mb-4">
-          <v-card-title class="text-h4 pa-4">
+          <v-card-title role="heading" class="text-h4 pa-4">
             {{ t('statistics.title') }}
           </v-card-title>
         </v-card>
