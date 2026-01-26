@@ -18,12 +18,14 @@ Cypress.Commands.add('login', (username?: string, password?: string) => {
     // Verify token is stored
     cy.window().then((win) => {
       const authToken = win.localStorage.getItem('authToken')
+      // eslint-disable-next-line @typescript-eslint/no-unused-expressions
       expect(authToken).to.exist
     })
   })
 })
 
 declare global {
+  // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace Cypress {
     interface Chainable {
       login(username?: string, password?: string): Chainable<void>
