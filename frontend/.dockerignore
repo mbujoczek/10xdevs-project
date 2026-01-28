@@ -1,0 +1,9 @@
+# Environment variables - frontend specific
+.env
+.env.local
+.env.*.local
+
+# Test files 
+cypress/
+coverage/
+
