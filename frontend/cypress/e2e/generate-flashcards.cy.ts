@@ -1,3 +1,5 @@
+/// <reference types="@testing-library/cypress" />
+
 describe('Generate Flashcards Flow', () => {
   beforeEach(() => {
     cy.login()
@@ -47,7 +49,7 @@ describe('Generate Flashcards Flow', () => {
       .should('contain', '0')
 
     // Step 4: Accept all cards one by one using chained promises
-    cy.findAllByRole('button', { name: /^accept$/i }).then(($buttons) => {
+    cy.findAllByRole('button', { name: /^accept$/i }).then(($buttons: JQuery<HTMLElement>) => {
       const count = $buttons.length
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       Array.from({ length: count }).reduce((chain: Cypress.Chainable<any>, _, i) => {
@@ -121,7 +123,7 @@ describe('Generate Flashcards Flow', () => {
     // Edit second card (if exists)
     cy.findAllByRole('button', { name: /^edit$/i })
       .eq(1)
-      .then(($btn) => {
+      .then(($btn: JQuery<HTMLElement>) => {
         if ($btn.length > 0) {
           cy.wrap($btn).first().click()
 
@@ -147,7 +149,7 @@ describe('Generate Flashcards Flow', () => {
     // Reject third card (if exists)
     cy.findAllByRole('button', { name: /^reject$/i })
       .eq(2)
-      .then(($btn) => {
+      .then(($btn: JQuery<HTMLElement>) => {
         if ($btn.length > 0) {
           cy.wrap($btn).first().click()
           cy.findByRole('button', { name: /^confirm$/i }).click()
@@ -157,7 +159,7 @@ describe('Generate Flashcards Flow', () => {
     // Accept all remaining pending cards
     cy.get('body').then(() => {
       const acceptAll = () => {
-        cy.findAllByRole('button', { name: /^accept$/i }).then(($buttons) => {
+        cy.findAllByRole('button', { name: /^accept$/i }).then(($buttons: JQuery<HTMLElement>) => {
           const enabledButtons = $buttons.filter(':not([disabled])')
           if (enabledButtons.length > 0) {
             cy.wrap(enabledButtons).first().click()
