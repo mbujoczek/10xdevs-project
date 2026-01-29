@@ -25,4 +25,8 @@
     <ProjectReference Include="..\..\src\10xdevs.Infrastructure\10xdevs.Infrastructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Repositories\" />
+  </ItemGroup>
+
 </Project>

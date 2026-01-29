@@ -21,6 +21,11 @@ runs:
       working-directory: frontend
       run: npm run lint
 
+    - name: Type check
+      shell: pwsh
+      working-directory: frontend
+      run: npm run type-check
+
     - name: Run unit tests
       shell: pwsh
       working-directory: frontend

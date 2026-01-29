@@ -58,7 +58,7 @@ public sealed class SpacedRepetitionService : ISpacedRepetitionService
         {
             0 => 1,
             1 => 6,
-            _ => (int)Math.Round((repetitions - 1) * 6 * (double)easeFactor)
+            _ => (int)Math.Round((decimal)(repetitions - 1) * 6m * easeFactor)
         };
     }
 }
