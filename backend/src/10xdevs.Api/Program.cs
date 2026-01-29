@@ -74,6 +74,8 @@ builder.Services.AddSwaggerGen(c =>
     });
 });
 
+builder.Services.AddHealthChecks();
+
 // Add DbContext
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
@@ -141,5 +143,7 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
+
+app.MapHealthChecks("/health");
 
 app.Run();
