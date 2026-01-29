@@ -67,7 +67,7 @@ dotnet restore 10xdevs.sln
    }
    ```
 
-2. Run database migrations:
+2. **Database migrations are applied automatically** when the application starts (see `Program.cs`). However, if you want to apply migrations manually without starting the app:
    ```sh
    dotnet ef database update --project src/10xdevs.Infrastructure --startup-project src/10xdevs.Api
    ```
@@ -86,7 +86,7 @@ Update `src/10xdevs.Api/appsettings.json` with your settings:
   },
   "OpenRouter": {
     "BaseUrl": "https://openrouter.ai/api/v1/",
-    "Referer": "http://localhost:5019"
+    "Referer": "http://localhost:5173"
   }
 }
 ```

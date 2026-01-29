@@ -10,10 +10,8 @@ This template helps you get started developing with Vue 3 and Vite. It's configu
 
 - **Chromium-based browsers** (Chrome, Edge, Brave):
   - [Vue.js devtools](https://chromewebstore.google.com/detail/vuejs-devtools/nhdogjmejiglipccpnnnanhbledajbpd)
-  - [Turn on Custom Object Formatter](http://bit.ly/object-formatters)
 - **Firefox**:
   - [Vue.js devtools](https://addons.mozilla.org/en-US/firefox/addon/vue-js-devtools/)
-  - [Turn on Custom Object Formatter](https://fxdx.dev/firefox-devtools-custom-object-formatters/)
 
 ## Project Structure
 
@@ -65,6 +63,21 @@ The project follows a scalable, feature-based architecture:
 
 ```sh
 npm install
+```
+
+### Configure Environment Variables
+
+Create a `.env` file in the frontend root directory with the following variables:
+
+```env
+# API Configuration
+VITE_API_BASE_URL=http://localhost:5019/api
+
+# Cypress E2E Test Credentials
+# These credentials are used by automated tests
+# Make sure to create a user with these credentials in your application
+CYPRESS_USERNAME=cypress-username
+CYPRESS_PASSWORD=cypress-password
 ```
 
 ### Compile and Hot-Reload for Development
